@@ -1,0 +1,84 @@
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:scrollbars="none"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/mapBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/map"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/icon_logo_holder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLevel"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/retro_font"
+            android:text="Lvl 1"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/icon"
+            app:layout_constraintStart_toStartOf="@+id/icon"
+            app:layout_constraintTop_toBottomOf="@+id/icon" />
+
+        <ImageView
+            android:id="@+id/level1Marker"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/marker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/level2Marker"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="100dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/marker"
+            app:layout_constraintStart_toEndOf="@+id/level1Marker"
+            app:layout_constraintTop_toTopOf="@+id/level3Marker" />
+
+        <ImageView
+            android:id="@+id/level3Marker"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="48dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/marker"
+            app:layout_constraintStart_toEndOf="@+id/level1Marker"
+            app:layout_constraintTop_toTopOf="@+id/level1Marker" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</HorizontalScrollView>
