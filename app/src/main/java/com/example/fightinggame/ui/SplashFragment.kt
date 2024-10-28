@@ -1,4 +1,4 @@
-package com.example.fightinggame
+package com.example.fightinggame.ui
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.fightinggame.R
 import com.example.fightinggame.databinding.FragmentSplashBinding
 
 

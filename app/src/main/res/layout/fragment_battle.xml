@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BattleFragment">
+    tools:context=".ui.BattleFragment">
 
     <!-- Background image for the battle scene -->
     <ImageView
@@ -29,15 +29,28 @@
             android:layout_height="80dp"
             android:src="@drawable/icon_logo_holder"
             android:layout_marginEnd="8dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ProgressBar
+                android:id="@+id/player1HealthBar"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:progress="80"
+                android:progressDrawable="@drawable/health_bar_player1"
+                style="?android:attr/progressBarStyleHorizontal" />
+            <TextView
+                android:id="@+id/player1HealthText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:text="99"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
 
-        <!-- Player 1 Health Bar -->
-        <ProgressBar
-            android:id="@+id/player1HealthBar"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
-            android:progress="80"
-            android:progressDrawable="@drawable/health_bar_player1"
-            style="?android:attr/progressBarStyleHorizontal" />
+
     </LinearLayout>
 
     <!-- Health and Character Avatars: Player 2 -->
@@ -48,16 +61,26 @@
         android:layout_gravity="end|top"
         android:orientation="horizontal"
         android:layout_margin="16dp">
-
-        <!-- Player 2 Health Bar -->
-        <ProgressBar
-            android:id="@+id/player2HealthBar"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
-            android:progress="80"
-            android:progressDrawable="@drawable/health_bar_player1"
-            style="?android:attr/progressBarStyleHorizontal" />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ProgressBar
+                android:id="@+id/player2HealthBar"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:progress="80"
+                android:progressDrawable="@drawable/health_bar_player1"
+                style="?android:attr/progressBarStyleHorizontal" />
+            <TextView
+                android:id="@+id/player2HealthText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:text="99"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
         <!-- Player 2 Avatar -->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/player2Avatar"
@@ -83,8 +106,9 @@
     <!-- Placeholder for characters: Player 1 on the left -->
     <ImageView
         android:id="@+id/player1Character"
-        android:layout_width="150dp"
+        android:layout_width="250dp"
         android:layout_height="250dp"
+        android:scaleType="fitXY"
         android:layout_gravity="bottom|start"
         android:src="@drawable/hero1"
         android:layout_marginStart="16dp"
@@ -93,11 +117,13 @@
     <!-- Placeholder for characters: Player 2 on the right -->
     <ImageView
         android:id="@+id/player2Character"
-        android:layout_width="150dp"
+        android:layout_width="250dp"
         android:layout_height="250dp"
+        android:scaleType="fitXY"
         android:layout_gravity="bottom|end"
         android:src="@drawable/hero2"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:scaleX="-1" />
 
 </FrameLayout>

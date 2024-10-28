@@ -1,6 +1,5 @@
-package com.example.fightinggame
+package com.example.fightinggame.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,20 +8,13 @@ import android.widget.ImageView
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.fightinggame.R
 import com.example.fightinggame.databinding.FragmentSelectCharacterBinding
 
 class SelectCharacterFragment : DialogFragment() {
     private lateinit var binding: FragmentSelectCharacterBinding
     private var selectedCharacter: ImageView? = null
-    private var listener: CharacterSelectionListener? = null
-    interface CharacterSelectionListener {
-        fun onCharacterSelected(characterId: Int)
-    }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        listener = context as? CharacterSelectionListener
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

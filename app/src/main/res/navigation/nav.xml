@@ -7,26 +7,26 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.fightinggame.SplashFragment"
+        android:name="com.example.fightinggame.ui.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" />
     <fragment
         android:id="@+id/homeFragment"
         tools:layout="@layout/fragment_home"
-        android:name="com.example.fightinggame.HomeFragment"
+        android:name="com.example.fightinggame.ui.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/mapsFragment"
         tools:layout="@layout/fragment_maps"
-        android:name="com.example.fightinggame.MapsFragment"
+        android:name="com.example.fightinggame.ui.MapsFragment"
         android:label="MapsFragment" />
     <dialog
         android:id="@+id/selectCharacterFragment"
-        android:name="com.example.fightinggame.SelectCharacterFragment"
+        android:name="com.example.fightinggame.ui.SelectCharacterFragment"
         android:label="SelectCharacterFragment" />
     <fragment
         android:id="@+id/battleFragment"
-        android:name="com.example.fightinggame.BattleFragment"
+        android:name="com.example.fightinggame.ui.BattleFragment"
         android:label="fragment_battle"
         tools:layout="@layout/fragment_battle" />
 </navigation>

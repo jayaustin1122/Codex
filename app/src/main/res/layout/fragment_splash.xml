@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:background="#3D2B1F"
     android:layout_height="match_parent"
-    tools:context=".SplashFragment">
+    tools:context=".ui.SplashFragment">
 
     <TextView
         android:id="@+id/titleText"
