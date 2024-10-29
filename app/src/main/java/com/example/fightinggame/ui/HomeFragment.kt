@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.fightinggame.R
 import com.example.fightinggame.databinding.FragmentHomeBinding
 
@@ -26,6 +27,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        playGif()
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.samplemusicbg)
         mediaPlayer?.isLooping = true // To loop the music
         mediaPlayer?.start()
@@ -48,4 +50,15 @@ class HomeFragment : Fragment() {
         mediaPlayer?.release()
         mediaPlayer = null
     }
+    private fun playGif() {
+        val torchViews = listOf(binding.torch1, binding.torch2, binding.torch3, binding.torch4)
+        torchViews.forEach { torchView ->
+            Glide.with(this)
+                .asGif()
+                .load(R.drawable.torch)
+                .into(torchView)
+        }
+    }
+
+
 }

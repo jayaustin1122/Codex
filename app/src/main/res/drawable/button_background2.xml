@@ -1,0 +1,27 @@
+<!-- res/drawable/button_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background color of the button -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#3D2B1F" /> <!-- Dark brown background -->
+        </shape>
+    </item>
+
+    <!-- Border for the button to give it a retro/pixel look -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="4dp"
+                android:color="#A68064" /> <!-- Light brown/golden stroke -->
+            <corners android:radius="0dp"/> <!-- Sharp corners for retro style -->
+        </shape>
+    </item>
+
+    <!-- Shadow effect -->
+    <item android:top="4dp" android:left="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#211912" /> <!-- Dark shadow -->
+        </shape>
+    </item>
+</layer-list>

@@ -3,63 +3,153 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="600dp"
     android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Title -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Your Character"
         android:textSize="20sp"
+        android:fontFamily="@font/irish"
+        android:textColor="@color/white"
         android:layout_gravity="center" />
 
-    <GridLayout
-        android:layout_width="match_parent"
+    <!-- Character Selection in Horizontal Layout -->
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="2"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_marginTop="16dp">
 
-        <ImageView
-            android:id="@+id/character1"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_columnWeight="1"
+        <!-- Character 1 Card -->
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@drawable/border_selector" />
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:gravity="center">
 
-        <ImageView
-            android:id="@+id/character2"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_columnWeight="1"
+            <ImageView
+                android:id="@+id/character1"
+                android:layout_width="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                />
+
+            <!-- Character Name 1 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hero 1"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Character 2 Card -->
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@drawable/border_selector" />
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:gravity="center">
 
-        <ImageView
-            android:id="@+id/character3"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_columnWeight="1"
+            <ImageView
+                android:id="@+id/character2"
+                android:layout_marginTop="10dp"
+                android:layout_width="80dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                />
+
+            <!-- Character Name 2 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hero 2"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Character 3 Card -->
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@drawable/border_selector" />
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:gravity="center">
 
-        <ImageView
-            android:id="@+id/character4"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_columnWeight="1"
+            <ImageView
+                android:id="@+id/character3"
+                android:layout_width="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop" />
+
+            <!-- Character Name 3 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hero 3"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Character 4 Card -->
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@drawable/border_selector" />
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:gravity="center">
 
-    </GridLayout>
+            <ImageView
+                android:id="@+id/character4"
+                android:layout_width="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop" />
 
+            <!-- Character Name 4 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hero 4"
+                android:textColor="@color/white"
+                android:layout_marginBottom="10dp"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Select Button -->
     <Button
         android:id="@+id/selectButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Select"
+        android:textColor="@color/white"
         android:enabled="false"
+        android:backgroundTint="#654321"
         android:layout_marginTop="16dp" />
 
 </LinearLayout>

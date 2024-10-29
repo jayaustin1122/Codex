@@ -9,18 +9,18 @@ data class Question(
     val correctAnswerIndex: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "",
-        parcel.createStringArrayList() ?: emptyList(),
-        parcel.readInt()
+        parcel.readString() ?: "",  // Handle null string by providing an empty string as default
+        parcel.createStringArrayList() ?: listOf(),  // Ensure an empty list if the parcel is null
+        parcel.readInt()  // Read integer as is
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(questionText)
-        parcel.writeStringList(choices)
-        parcel.writeInt(correctAnswerIndex)
+        parcel.writeString(questionText)  // Write the question text
+        parcel.writeStringList(choices)  // Write the choices list
+        parcel.writeInt(correctAnswerIndex)  // Write the correct answer index
     }
 
-    override fun describeContents(): Int = 0
+    override fun describeContents(): Int = 0  // No special contents for the parcel
 
     companion object CREATOR : Parcelable.Creator<Question> {
         override fun createFromParcel(parcel: Parcel): Question = Question(parcel)

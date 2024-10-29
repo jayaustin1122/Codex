@@ -78,7 +78,7 @@ class BattleFragment : Fragment() {
     }
     private fun updateHealthDisplay() {
         binding.player1HealthText.text = "Your Health: $playerHealth"
-        binding.player2HealthText.text = "Monster Health: $monsterHealth"
+        binding.player2HealthText.text = "Enemy Health: $monsterHealth"
 
         binding.player1HealthBar.progress = playerHealth
         binding.player2HealthBar.progress = monsterHealth

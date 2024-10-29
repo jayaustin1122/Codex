@@ -2,19 +2,44 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#3D2B1F"
     android:layout_height="match_parent"
+    android:background="#3D2B1F"
     tools:context=".ui.SplashFragment">
 
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sample Game"
+        android:text="CODEX"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:fontFamily="@font/irish"
+        android:textSize="50sp"
         android:layout_gravity="center"
-        android:paddingBottom="20dp"
-        android:fontFamily="@font/retro_font" />
+        android:paddingBottom="20dp" />
+
+    <!-- Horizontal ProgressBar with green color -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="100dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/progress_bar" />
+
+    <!-- Loading Text -->
+    <TextView
+        android:id="@+id/loadingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/irish"
+        android:text="Loading..."
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="70dp" />
+
 </FrameLayout>

@@ -1,6 +1,7 @@
 <HorizontalScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:scrollbars="none"
     android:layout_height="match_parent">
@@ -34,50 +35,56 @@
 
         <TextView
             android:id="@+id/tvLevel"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:clickable="true"
             android:focusable="true"
-            android:fontFamily="@font/retro_font"
+            android:fontFamily="@font/irish"
             android:text="Lvl 1"
             android:textColor="@color/black"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="@+id/icon"
-            app:layout_constraintStart_toStartOf="@+id/icon"
-            app:layout_constraintTop_toBottomOf="@+id/icon" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/icon"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            app:layout_constraintTop_toTopOf="@+id/icon" />
 
         <ImageView
             android:id="@+id/level1Marker"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="28dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginBottom="164dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/marker"
+            android:src="@drawable/torch"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/level2Marker"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="100dp"
+            android:layout_width="59dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="140dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/marker"
-            app:layout_constraintStart_toEndOf="@+id/level1Marker"
-            app:layout_constraintTop_toTopOf="@+id/level3Marker" />
+            android:src="@drawable/locked_level"
+            app:layout_constraintStart_toEndOf="@+id/level3Marker"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/level3Marker"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="48dp"
+            android:layout_width="48dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="164dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/marker"
+            android:scaleType="fitXY"
+            android:src="@drawable/locked_level"
             app:layout_constraintStart_toEndOf="@+id/level1Marker"
-            app:layout_constraintTop_toTopOf="@+id/level1Marker" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

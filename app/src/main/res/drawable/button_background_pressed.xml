@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/button_background_pressed.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Darker background to simulate button press -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#2E1E14" /> <!-- Darker brown background -->
+        </shape>
+    </item>
+
+    <!-- Same stroke and shadow as original button -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="4dp"
+                android:color="#A68064" /> <!-- Same light brown stroke -->
+            <corners android:radius="0dp"/> <!-- Sharp corners for retro style -->
+        </shape>
+    </item>
+</layer-list>
