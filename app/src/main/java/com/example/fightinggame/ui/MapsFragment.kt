@@ -31,51 +31,8 @@ class MapsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         playGif()
-        // Get selected character and attack ID
-        val selectedCharacterId = arguments?.getInt("SELECTED_CHARACTER_ID", -1)
-        val selectedCharacterAttackId = arguments?.getInt("SELECTED_CHARACTER_ATTACK_ID", -1)
-
-        // Store selected character and attack in the ViewModel
-        selectedCharacterId?.let {
-            sharedViewModel.setSelectedCharacterId(it)
-        }
-        selectedCharacterAttackId?.let {
-            sharedViewModel.setSelectedCharacterAttackId(it)
-        }
-
-
         showDungeonAdventureDialog(requireContext())
-
-
         binding.level1Marker.setOnClickListener {
-            val level = Level(
-                levelNumber = 1,
-                questions = listOf(
-                    Question(
-                        questionText = "What is the correct value to return to the operating system upon the successful completion of a program?",
-                        choices = listOf("0", "1", "2", "-1"),
-                        correctAnswerIndex = 0
-                    ),
-                    Question(
-                        questionText = "What symbol is used to state the beginning and the end of blocks of code?",
-                        choices = listOf("{ and }", "- and -", "( and )", "< and >"),
-                        correctAnswerIndex = 0
-                    ),
-                    Question(
-                        questionText = "Which of the following answers is the correct operator to compare two variables?",
-                        choices = listOf("==", "&", "=", "&&"),
-                        correctAnswerIndex = 0
-                    ),
-                    Question(
-                        questionText = "Which of the following shows the correct syntax for an if statement?",
-                        choices = listOf("if (expression)", "if {expression}", "if <expression>", "if expression"),
-                        correctAnswerIndex = 0
-                    )
-                )
-            )
-
-            sharedViewModel.setCurrentLevel(level)
-
             findNavController().navigate(R.id.battleFragment)
         }
     }

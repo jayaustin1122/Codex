@@ -44,6 +44,7 @@
 
             <!-- Character Name 1 -->
             <TextView
+                android:id="@+id/characterName1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hero 1"
@@ -73,6 +74,7 @@
 
             <!-- Character Name 2 -->
             <TextView
+                android:id="@+id/characterName2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hero 2"
@@ -101,6 +103,7 @@
 
             <!-- Character Name 3 -->
             <TextView
+                android:id="@+id/characterName3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hero 3"
@@ -129,14 +132,15 @@
 
             <!-- Character Name 4 -->
             <TextView
+                android:id="@+id/characterName4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="10dp"
                 android:text="Hero 4"
                 android:textColor="@color/white"
-                android:layout_marginBottom="10dp"
-                android:textSize="14sp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>

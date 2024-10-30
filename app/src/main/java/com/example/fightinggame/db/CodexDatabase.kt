@@ -19,7 +19,7 @@ import com.example.fightinggame.model.mapsLevel
 
 @Database(
     entities = [Character::class, CharacterSelection::class, mapsLevel::class, MonsterEnemy::class, Trivia::class, UserPoints::class],
-    version = 1
+    version = 2
 )
 abstract class CodexDatabase : RoomDatabase() {
     abstract fun getCharacterDao(): CharacterDao

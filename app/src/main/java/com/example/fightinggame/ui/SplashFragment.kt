@@ -107,7 +107,7 @@ class SplashFragment : Fragment() {
 
             // Insert levels
             levels.insertLevels(
-                mapsLevel(false, 1),
+                mapsLevel(true, 1),
                 mapsLevel(false, 2),
                 mapsLevel(false, 3),
                 mapsLevel(false, 4),
