@@ -118,7 +118,7 @@ class SelectCharacterFragment : DialogFragment() {
             characterSelectionDao.deleteAllCharacterSelections()
         }
         val characterSelection = CharacterSelection(
-            id = character.id,
+            id = 1,
             gifStand = character.gifStand,
             gifAttack = character.gifAttack,
 

@@ -17,9 +17,10 @@ interface CharacterSelectionDao {
     @Query("SELECT * FROM character_selection")
     suspend fun getAllCharacterSelections(): List<CharacterSelection>
 
-    // Retrieve a character selection by a specific condition, e.g., gifStand or gifAttack
-    @Query("SELECT * FROM character_selection WHERE gifStand = :standGif OR gifAttack = :attackGif")
-    suspend fun getCharacterSelectionByGif(standGif: String?, attackGif: String?): CharacterSelection?
+    // Retrieve a character selection by ID
+    @Query("SELECT * FROM character_selection WHERE id = :characterId")
+    suspend fun getCharacterSelectionById(characterId: Int): CharacterSelection?
+
     // Delete all character selections
     @Query("DELETE FROM character_selection")
     suspend fun deleteAllCharacterSelections()

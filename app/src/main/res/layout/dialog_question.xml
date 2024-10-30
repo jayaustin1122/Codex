@@ -1,4 +1,3 @@
-<!-- res/layout/dialog_question.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,15 +12,61 @@
         android:textSize="18sp"
         android:layout_marginBottom="16dp" />
 
-    <RadioGroup
-        android:id="@+id/choicesGroup"
+    <!-- Outer LinearLayout for vertical arrangement of button sets -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
 
-    <Button
-        android:id="@+id/submitAnswerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit" />
+        <!-- First vertical set of buttons -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/answerButton1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="Answer 1" />
+
+            <Button
+                android:id="@+id/answerButton3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="Answer 3" />
+
+        </LinearLayout>
+
+        <!-- Second vertical set of buttons -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/answerButton2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="Answer 2" />
+
+            <Button
+                android:id="@+id/answerButton4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="Answer 4" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Submit button -->
+
 </LinearLayout>

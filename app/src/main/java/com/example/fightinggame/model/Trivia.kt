@@ -14,7 +14,7 @@ data class Trivia(
     val ans2: String,
     val ans3: String,
     val ans4: String,
-    val correctAnswerIndex: Int,
+    val correctAnswerIndex: String,
     val number: Int,
     var isAsked: Boolean = false,
 
