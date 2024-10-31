@@ -9,17 +9,21 @@ import com.example.fightinggame.dao.CharacterSelectionDao
 import com.example.fightinggame.dao.LevelsDao
 import com.example.fightinggame.dao.MonsterEnemyDao
 import com.example.fightinggame.dao.TriviaDao
+import com.example.fightinggame.dao.TriviaUserAnswerDao
+import com.example.fightinggame.dao.UserDao
 import com.example.fightinggame.dao.UserPointsDao
 import com.example.fightinggame.model.Character
 import com.example.fightinggame.model.CharacterSelection
 import com.example.fightinggame.model.MonsterEnemy
 import com.example.fightinggame.model.Trivia
+import com.example.fightinggame.model.TriviaQuestionUserAnswer
+import com.example.fightinggame.model.User
 import com.example.fightinggame.model.UserPoints
 import com.example.fightinggame.model.mapsLevel
 
 @Database(
-    entities = [Character::class, CharacterSelection::class, mapsLevel::class, MonsterEnemy::class, Trivia::class, UserPoints::class],
-    version = 2
+    entities = [Character::class, CharacterSelection::class, mapsLevel::class, MonsterEnemy::class, Trivia::class, UserPoints::class,User::class,TriviaQuestionUserAnswer::class],
+    version = 4
 )
 abstract class CodexDatabase : RoomDatabase() {
     abstract fun getCharacterDao(): CharacterDao
@@ -28,6 +32,8 @@ abstract class CodexDatabase : RoomDatabase() {
     abstract fun getTriviaDao(): TriviaDao
     abstract fun getUserPointsDao(): UserPointsDao
     abstract fun getMonsterEnemyDao(): MonsterEnemyDao
+    abstract fun getUserName(): UserDao
+    abstract fun getTriviaQuestionUserAnswer(): TriviaUserAnswerDao
 
     companion object {
         @Volatile

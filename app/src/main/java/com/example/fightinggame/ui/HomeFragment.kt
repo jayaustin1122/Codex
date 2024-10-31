@@ -1,5 +1,7 @@
 package com.example.fightinggame.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.fightinggame.R
@@ -15,6 +19,10 @@ import com.example.fightinggame.dao.CharacterDao
 import com.example.fightinggame.dao.CharacterSelectionDao
 import com.example.fightinggame.databinding.FragmentHomeBinding
 import com.example.fightinggame.db.CodexDatabase
+import com.example.fightinggame.model.User
+import com.example.fightinggame.model.UserPoints
+import com.example.fightinggame.util.SplashViewModelFactory
+import com.example.fightinggame.viewmodels.SplashViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -26,12 +34,18 @@ class HomeFragment : Fragment() {
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var characterDao: CharacterDao
     private lateinit var selectionDao: CharacterSelectionDao
+    private lateinit var sharedPreferences: SharedPreferences
+    private var isShown = false
+    private val viewModel: SplashViewModel by viewModels { SplashViewModelFactory(requireContext()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
+        sharedPreferences =
+            requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        isShown = sharedPreferences.getBoolean("isShown", false)
         return binding.root
     }
 
@@ -49,8 +63,15 @@ class HomeFragment : Fragment() {
 
         binding.newRunButton.setOnClickListener {
             if (binding.continueButton.visibility == View.VISIBLE) {
-                // Prompt user about overwriting current progress
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.updatePoints(UserPoints(1, 0))
+                    viewModel.insertUser(User(1, "playerName"))
+                    viewModel.insertData()
+                }
                 overwriteGameProgress()
+                isShown = false
+                sharedPreferences.edit().putBoolean("isShown", isShown).apply()
             } else {
                 openSelectCharacterFragment()
             }

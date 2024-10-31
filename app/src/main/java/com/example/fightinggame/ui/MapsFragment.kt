@@ -2,6 +2,7 @@ package com.example.fightinggame.ui
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,38 +12,135 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.fightinggame.R
 import com.example.fightinggame.dao.LevelsDao
+import com.example.fightinggame.dao.UserDao
+import com.example.fightinggame.dao.UserPointsDao
+import com.example.fightinggame.databinding.DialogEnterNameBinding
 import com.example.fightinggame.databinding.FragmentMapsBinding
 import com.example.fightinggame.db.CodexDatabase
+import com.example.fightinggame.model.User
 import com.example.fightinggame.model.mapsLevel
 import com.example.fightinggame.util.LevelsViewModelFactory
 import com.example.fightinggame.viewmodels.LevelsViewModel
+import kotlinx.coroutines.launch
 
 class MapsFragment : Fragment() {
     private lateinit var binding: FragmentMapsBinding
     private lateinit var levelsDao: LevelsDao
+    private lateinit var user: UserDao
     private lateinit var levelsViewModel: LevelsViewModel
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var userPointsDao: UserPointsDao
+    private var isShown = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMapsBinding.inflate(inflater, container, false)
+        sharedPreferences =
+            requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        isShown = sharedPreferences.getBoolean("isShown", false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         levelsDao = CodexDatabase.invoke(requireContext()).getMapsLevelDao()
+        user = CodexDatabase.invoke(requireContext()).getUserName()
+        userPointsDao = CodexDatabase.invoke(requireContext()).getUserPointsDao()
         val factory = LevelsViewModelFactory(levelsDao)
         levelsViewModel = ViewModelProvider(this, factory).get(LevelsViewModel::class.java)
-
+        getUserName()
         showLevels()
-       // showDungeonAdventureDialog(requireContext())
+        if (!isShown) {
+            dialogOpenEnterName()
+
+        }
+
         binding.level1Marker.setOnClickListener {
             findNavController().navigate(R.id.battleFragment)
+        }
+    }
+
+    private fun getUserName() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val user = user.getUserById(1)
+            if (user != null ) {
+                binding.tvLevel.text = user.name
+                getPointUser()
+            } else {
+                Log.d("UserName", "User or Points data is null")
+                binding.tvLevel.text = "Player Name"
+            }
+        }
+    }
+    fun getPointUser(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            val points = userPointsDao.getUserPoints(1)
+
+            if (points != null ) {
+                    binding.tvPoints.text = "Points: ${points.points}"
+            } else {
+                binding.tvPoints.text = "Points: 0"
+            }
+        }
+    }
+
+
+    private fun dialogOpenEnterName() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                // Use ViewBinding to inflate the custom layout
+                val binding = DialogEnterNameBinding.inflate(LayoutInflater.from(requireContext()))
+
+                // Create the AlertDialog
+                val dialog = AlertDialog.Builder(requireContext())
+                    .setView(binding.root)
+                    .create()
+
+                // Handle the submit button click
+                binding.buttonSubmit.setOnClickListener {
+                    val playerName = binding.editTextPlayerName.text.toString().trim()
+
+                    if (playerName.isNotEmpty()) {
+                        try {
+                            // Save the player's name to the database
+                            lifecycleScope.launch {
+                                user.insertUser(User(1, playerName)) // Replace '1' with correct user ID if needed
+                            }
+                            Toast.makeText(
+                                requireContext(),
+                                "Player name saved: $playerName",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            dialog.dismiss() // Close the dialog
+                            getUserName()
+                            showDungeonAdventureDialog(requireContext())
+                        } catch (e: Exception) {
+                            Log.e("DialogError", "Error saving player name: ${e.message}", e)
+                            Toast.makeText(
+                                requireContext(),
+                                "Failed to save player name",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Please enter a name", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+
+                // Show the dialog
+                dialog.show()
+
+            } catch (e: Exception) {
+                Log.e("DialogError", "Error opening dialog: ${e.message}", e)
+                Toast.makeText(requireContext(), "Error opening dialog", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -52,8 +150,8 @@ class MapsFragment : Fragment() {
             bindCharactersToViews(levels)
         }
     }
+
     private fun bindCharactersToViews(levels: List<mapsLevel>) {
-        // List of corresponding views for each level marker
         val levelMarkers = listOf(
             binding.level1Marker,
             binding.level2Marker,
@@ -62,16 +160,31 @@ class MapsFragment : Fragment() {
             binding.level5Marker,
         )
 
-        // Loop through each level and bind it to the corresponding marker
         for ((index, level) in levels.withIndex()) {
             if (index < levelMarkers.size) {
                 val markerView = levelMarkers[index]
 
                 if (level.status) {
-                    // Play GIF for unlocked levels
-                    playGif(markerView)
+                    if (level.isFinish) {
+                        playFinishedLevelGif(markerView)
+                        markerView.setOnClickListener {
+                            Toast.makeText(
+                                requireContext(),
+                                "This level is already finished.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        playGif(markerView)
+                        markerView.setOnClickListener {
+                            val adjustedIndex = index + 1
+                            val bundle = Bundle().apply {
+                                putInt("selected_level_index", adjustedIndex)
+                            }
+                            findNavController().navigate(R.id.battleFragment, bundle)
+                        }
+                    }
                 } else {
-                    // Show toast that level is locked
                     markerView.setOnClickListener {
                         Toast.makeText(
                             requireContext(),
@@ -80,37 +193,23 @@ class MapsFragment : Fragment() {
                         ).show()
                     }
                 }
-
-                // Set the navigation to the battle fragment if the level is unlocked
-                markerView.setOnClickListener {
-                    if (level.status) {
-                        // Increment index by 1 before passing to the next fragment
-                        val adjustedIndex = index + 1
-
-                        // Pass the adjusted index to the next fragment using a Bundle
-                        val bundle = Bundle().apply {
-                            putInt("selected_level_index", adjustedIndex)  // Pass the adjusted index
-                        }
-
-                        findNavController().navigate(R.id.battleFragment, bundle)
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "This level is locked. Please finish another level to unlock.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-
             }
         }
     }
+
 
     // Play GIF on unlocked levels
     private fun playGif(view: View) {
         Glide.with(this)
             .asGif()
             .load(R.drawable.torch)  // Assume torch is your gif resource
+            .into(view as ImageView)
+    }
+    // Play GIF on unlocked levels
+    private fun playFinishedLevelGif(view: View) {
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.dance)  // Assume torch is your gif resource
             .into(view as ImageView)
     }
 
@@ -128,7 +227,11 @@ class MapsFragment : Fragment() {
         val dialogBuilder = AlertDialog.Builder(context, R.style.CustomAlertDialogTheme)
             .setTitle("Dungeon of Code Adventure")
             .setMessage(message)
-            .setPositiveButton("Continue") { dialog, _ -> dialog.dismiss() }
+            .setPositiveButton("Continue") { dialog, _ ->
+                dialog.dismiss()
+                isShown = true
+                sharedPreferences.edit().putBoolean("isShown", isShown).apply()
+            }
             .setNegativeButton("Exit") { dialog, _ -> findNavController().navigateUp() }
 
         val dialog = dialogBuilder.create()
