@@ -68,7 +68,11 @@ class BattleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         startTimer()
         binding.timerText.setOnClickListener {
-            viewModel.retrieveQuestionsAnswer()
+            val adjustedIndex = selectedIndex?.plus(1)
+            val bundle = Bundle().apply {
+                putInt("index", adjustedIndex!!)
+            }
+            findNavController().navigate(R.id.reviewFragment, bundle)
         }
         selectedIndex = arguments?.getInt("selected_level_index")
         // Initialize database DAOs
@@ -128,10 +132,10 @@ class BattleFragment : Fragment() {
     }
 
     private val askedQuestionNumbers = mutableListOf<Int>()
-
+    private val listOfQuestionAnswers = mutableListOf<TriviaQuestionUserAnswer>()
     private fun showQuestionDialog() {
         lifecycleScope.launch {
-            if (isAdded){
+            if (isAdded) {
                 val triviaDao = CodexDatabase.invoke(requireContext()).getTriviaDao()
                 val questions = triviaDao.getRandomNewTrivia()
 
@@ -147,13 +151,19 @@ class BattleFragment : Fragment() {
                         DialogQuestionBinding.inflate(LayoutInflater.from(requireContext()))
                     dialogBinding.questionText.text = question.question
 
-                    dialogBinding.answerButton1.text = question.ans1
-                    dialogBinding.answerButton2.text = question.ans2
-                    dialogBinding.answerButton3.text = question.ans3
-                    dialogBinding.answerButton4.text = question.ans4
+                    // Randomize the answers
+                    val answers = listOf(
+                        question.ans1, question.ans2, question.ans3, question.ans4
+                    ).shuffled()
 
-                    questionDialog = AlertDialog.Builder(requireContext()).setView(dialogBinding.root)
-                        .setCancelable(false).create()
+                    dialogBinding.answerButton1.text = answers[0]
+                    dialogBinding.answerButton2.text = answers[1]
+                    dialogBinding.answerButton3.text = answers[2]
+                    dialogBinding.answerButton4.text = answers[3]
+
+                    questionDialog =
+                        AlertDialog.Builder(requireContext()).setView(dialogBinding.root)
+                            .setCancelable(false).create()
 
                     // Set click listeners for the answer buttons
                     val answerButtons = listOf(
@@ -181,7 +191,10 @@ class BattleFragment : Fragment() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 playerPoints++ // Increment points
-                                Log.d("PlayerPoints", "Current Player Points: $playerPoints") // Log the updated points
+                                Log.d(
+                                    "PlayerPoints",
+                                    "Current Player Points: $playerPoints"
+                                ) // Log the updated points
 
                                 shakeScreen()
                                 viewLifecycleOwner.lifecycleScope.launch {
@@ -190,62 +203,139 @@ class BattleFragment : Fragment() {
                                         "BattleFragment",
                                         "Question marked as asked: ${question.question}"
                                     )
-                                    val questionUser = question.question
-                                    val questionAnswer = question.correctAnswerIndex
-                                    val questionNumber = question.number
-                                    val question1 = question.ans1
-                                    val question2 = question.ans2
-                                    val question3 = question.ans3
-                                    val question4 = question.ans4
-                                    val userSelect = button.text.toString().trim() // user selected answer
-                                    viewModel.insertQuestionsAnswer(TriviaQuestionUserAnswer(questionUser,questionAnswer,questionNumber,question1,question2,question3,question4,selectedIndex!!.toInt(),userSelect))
-
+                                    listOfQuestionAnswers.add(
+                                        TriviaQuestionUserAnswer(
+                                            question = question.question,
+                                            correctAnswerIndex = question.correctAnswerIndex,
+                                            number = question.number,
+                                            ans1 = question.ans1,
+                                            ans2 = question.ans2,
+                                            ans3 = question.ans3,
+                                            ans4 = question.ans4,
+                                            level = selectedIndex!!.toInt(),
+                                            userSelectAnswer = button.text.toString().trim()
+                                        )
+                                    )
                                 }
 
                                 if (monsterHealth <= 0) {
-                                    viewLifecycleOwner.lifecycleScope.launch {
+                                    lifecycleScope.launch {
                                         try {
-                                            // First, update the level
-                                            val level = selectedIndex?.plus(1)?.let { it1 -> mapsLevel(true, false, it1.toLong()) }
+                                            // Step 1: Update the player's level
+                                            val level = selectedIndex?.plus(1)?.let { it1 ->
+                                                mapsLevel(
+                                                    true,
+                                                    false,
+                                                    it1.toLong()
+                                                )
+                                            }
                                             level?.let {
                                                 levelsDao.updateLevel(it)
-                                                Log.d("BattleFragment", "Level updated successfully.")
+                                                Log.d(
+                                                    "BattleFragment",
+                                                    "Level updated successfully."
+                                                )
+                                            }
+                                            listOfQuestionAnswers.forEach { answer ->
+                                                Log.d(
+                                                    "BattleFragment",
+                                                    "Inserting question answer: ${answer.question}, " +
+                                                            "User's answer: ${answer.userSelectAnswer}, " +
+                                                            "Correct answer: ${answer.correctAnswerIndex}"
+                                                )
                                             }
 
-                                            // Next, update user points
-                                            // Retrieve the current points from the database
-                                            val existingPoints = userPointsDao.getUserPoints(1)
+                                                // Store all questions and answers into the database
+                                            viewModel.insertQuestionsAnswer2(listOfQuestionAnswers)
+                                            // Step 3: Navigate to the review fragment with updated index
 
+
+                                            // Step 4: Retrieve the current user points from the database
+                                            val existingPoints = userPointsDao.getUserPoints(1)
                                             if (existingPoints != null) {
                                                 // Add the new points to the existing points
-                                                val updatedPoints = existingPoints.points + playerPoints
-                                                userPointsDao.updateUserPoints(UserPoints(1, updatedPoints))
-                                                Toast.makeText(requireContext(), "Points updated: $updatedPoints", Toast.LENGTH_SHORT).show()
-                                                Log.d("BattleFragmentaaa", "User points updated successfully${existingPoints.points} $playerPoints.")
+                                                val updatedPoints =
+                                                    existingPoints.points + playerPoints
+                                                userPointsDao.updateUserPoints(
+                                                    UserPoints(
+                                                        1,
+                                                        updatedPoints
+                                                    )
+                                                )
+                                                findNavController().navigate(R.id.mapsFragment)
+
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "Points updated: $updatedPoints",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                                Log.d(
+                                                    "BattleFragment",
+                                                    "User points updated successfully: Previous: ${existingPoints.points}, New: $playerPoints"
+                                                )
+                                                val adjustedIndex = selectedIndex?.plus(1)
+                                                val bundle = Bundle().apply {
+                                                    putInt("index", adjustedIndex!!)
+                                                }
+                                                findNavController().navigate(
+                                                    R.id.reviewFragment,
+                                                    bundle
+                                                )
                                             } else {
                                                 // If no points exist, insert the new points
-                                                userPointsDao.insertUserPoints(UserPoints(1, playerPoints))
-                                                Toast.makeText(requireContext(), "Points inserted: $playerPoints", Toast.LENGTH_SHORT).show()
-                                                Log.d("BattleFragment", "User points inserted successfully.")
+                                                userPointsDao.insertUserPoints(
+                                                    UserPoints(
+                                                        1,
+                                                        playerPoints
+                                                    )
+                                                )
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "Points inserted: $playerPoints",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                                Log.d(
+                                                    "BattleFragment",
+                                                    "User points inserted successfully."
+                                                )
                                             }
 
-                                            // Finally, update the level status to 'finished'
-                                            levelsDao.updateLevel(mapsLevel(true, true, selectedIndex!!.toLong()))
-                                            Log.d("BattleFragment", "Current level status updated to finished.")
+                                            // Step 5: Update the current level status to 'finished'
+                                            levelsDao.updateLevel(
+                                                mapsLevel(
+                                                    true,
+                                                    true,
+                                                    selectedIndex!!.toLong()
+                                                )
+                                            )
+                                            Log.d(
+                                                "BattleFragment",
+                                                "Current level status updated to finished."
+                                            )
 
                                         } catch (e: CancellationException) {
-                                            Log.e("BattleFragment", "Coroutine was cancelled: ${e.message}", e)
+                                            Log.e(
+                                                "BattleFragment",
+                                                "Coroutine was cancelled: ${e.message}",
+                                                e
+                                            )
                                         } catch (e: Exception) {
-                                            Log.e("BattleFragment", "Error during updates: ${e.message}", e)
+                                            Log.e(
+                                                "BattleFragment",
+                                                "Error during updates: ${e.message}",
+                                                e
+                                            )
                                         } finally {
-                                            // Navigate back and reset the game
-                                            findNavController().navigateUp()
-                                            resetGame()
+                                            // Step 6: Navigate back and reset the game after everything is done
+                                            findNavController().navigate(R.id.mapsFragment)
+
                                         }
                                     }
                                 } else {
+                                    // If the monster is not defeated, continue with the attack animation
                                     performAttackAnimation(isPlayerAttacking = true)
                                 }
+
 
                             } else {
                                 playerHealth -= healthDeduction
@@ -254,6 +344,19 @@ class BattleFragment : Fragment() {
                                     "Wrong! Your health decreases by $healthDeduction.",
                                     Toast.LENGTH_SHORT
                                 ).show()
+                                listOfQuestionAnswers.add(
+                                    TriviaQuestionUserAnswer(
+                                        question = question.question,
+                                        correctAnswerIndex = question.correctAnswerIndex,
+                                        number = question.number,
+                                        ans1 = question.ans1,
+                                        ans2 = question.ans2,
+                                        ans3 = question.ans3,
+                                        ans4 = question.ans4,
+                                        level = selectedIndex!!.toInt(),
+                                        userSelectAnswer = button.text.toString().trim()
+                                    )
+                                )
                                 shakeScreen()
 
                                 if (playerHealth <= 0) {
@@ -262,8 +365,8 @@ class BattleFragment : Fragment() {
                                         "You are defeated! Please Try Again!",
                                         Toast.LENGTH_LONG
                                     ).show()
-                                    findNavController().navigateUp()
-                                    resetGame()
+                                    findNavController().navigate(R.id.mapsFragment)
+
                                     return@setOnClickListener
                                 } else {
                                     performAttackAnimationEnemy(isPlayerAttacking = true)
@@ -281,7 +384,7 @@ class BattleFragment : Fragment() {
                     questionDialog?.show() // Show the dialog
                 } else {
                     Toast.makeText(requireContext(), "No more questions.", Toast.LENGTH_LONG).show()
-                    resetGame()
+                    findNavController().navigateUp()
                 }
             }
 
@@ -312,16 +415,6 @@ class BattleFragment : Fragment() {
 
     private fun displaySelectedCharacterGifEnemy(characterId: Int) {
         Glide.with(this).asGif().load(characterId).into(binding.player2Character)
-    }
-
-    private fun resetGame() {
-        // Reset health and points for new game
-        monsterHealth = 100
-        playerHealth = 100
-        playerPoints = 0
-        updateHealthDisplay()
-        loadCharactersFromDatabase()
-        loadEnemyFromDatabase(arguments?.getInt("selected_level_index"))
     }
 
     private fun shakeScreen() {

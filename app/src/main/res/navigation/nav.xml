@@ -29,4 +29,9 @@
         android:name="com.example.fightinggame.ui.BattleFragment"
         android:label="fragment_battle"
         tools:layout="@layout/fragment_battle" />
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.example.fightinggame.ui.ReviewFragment"
+        android:label="fragment_review"
+        tools:layout="@layout/fragment_review" />
 </navigation>

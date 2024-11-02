@@ -60,27 +60,12 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             triviaUserAnswerDao.insertTriviaQuestion(trivias)
         }
     }
-    fun retrieveQuestionsAnswer() {
+    fun insertQuestionsAnswer2(trivias: List<TriviaQuestionUserAnswer>) {
         viewModelScope.launch {
-            try {
-                // Retrieve all trivia questions from the database
-                val questions = triviaUserAnswerDao.getAllTriviaQuestions()
-
-                // Log each question's details
-                for (question in questions) {
-                    Log.d("TriviaQuestion", "Question: ${question.question}, " +
-                            "Answer1: ${question.ans1}, " +
-                            "Answer2: ${question.ans2}, " +
-                            "Answer3: ${question.ans3}, " +
-                            "Answer4: ${question.ans4}, " +
-                            "Correct Answer Index: ${question.correctAnswerIndex}, " +
-                            "Level: ${question.level}")
-                }
-            } catch (e: Exception) {
-                Log.e("TriviaViewModel", "Error retrieving questions: ${e.message}")
-            }
+            triviaUserAnswerDao.insertMultipleTriviaQuestions(trivias)
         }
     }
+
 
     fun updatePoints(userPoints: UserPoints) {
         viewModelScope.launch {

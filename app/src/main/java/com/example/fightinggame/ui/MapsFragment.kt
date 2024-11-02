@@ -61,9 +61,6 @@ class MapsFragment : Fragment() {
 
         }
 
-        binding.level1Marker.setOnClickListener {
-            findNavController().navigate(R.id.battleFragment)
-        }
     }
 
     private fun getUserName() {
@@ -166,6 +163,7 @@ class MapsFragment : Fragment() {
 
                 if (level.status) {
                     if (level.isFinish) {
+                        // If the level is finished, show a GIF and navigate to ReviewFragment
                         playFinishedLevelGif(markerView)
                         markerView.setOnClickListener {
                             Toast.makeText(
@@ -173,18 +171,26 @@ class MapsFragment : Fragment() {
                                 "This level is already finished.",
                                 Toast.LENGTH_SHORT
                             ).show()
+
+                            // Navigate to the ReviewFragment with the selected index
+                            val bundle = Bundle().apply {
+                                putInt("index", index + 1) // Pass the current index + 1
+                            }
+                            findNavController().navigate(R.id.reviewFragment, bundle)
                         }
                     } else {
+                        // If the level is unlocked but not finished, show a GIF and navigate to BattleFragment
                         playGif(markerView)
                         markerView.setOnClickListener {
                             val adjustedIndex = index + 1
                             val bundle = Bundle().apply {
-                                putInt("selected_level_index", adjustedIndex)
+                                putInt("selected_level_index", adjustedIndex) // Pass the current index + 1
                             }
                             findNavController().navigate(R.id.battleFragment, bundle)
                         }
                     }
                 } else {
+                    // If the level is locked, show a message
                     markerView.setOnClickListener {
                         Toast.makeText(
                             requireContext(),
