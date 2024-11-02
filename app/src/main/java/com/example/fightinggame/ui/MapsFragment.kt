@@ -3,6 +3,7 @@ package com.example.fightinggame.ui
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,6 +36,7 @@ class MapsFragment : Fragment() {
     private lateinit var levelsViewModel: LevelsViewModel
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var userPointsDao: UserPointsDao
+    private var mediaPlayer: MediaPlayer? = null
     private var isShown = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +51,9 @@ class MapsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.maps)
+        mediaPlayer?.isLooping = true // To loop the music
+        mediaPlayer?.start()
         levelsDao = CodexDatabase.invoke(requireContext()).getMapsLevelDao()
         user = CodexDatabase.invoke(requireContext()).getUserName()
         userPointsDao = CodexDatabase.invoke(requireContext()).getUserPointsDao()
@@ -62,7 +67,13 @@ class MapsFragment : Fragment() {
         }
 
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
 
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
     private fun getUserName() {
         viewLifecycleOwner.lifecycleScope.launch {
             val user = user.getUserById(1)

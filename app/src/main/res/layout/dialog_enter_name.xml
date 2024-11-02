@@ -3,29 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/dialog_background"
     android:padding="20dp">
 
     <TextView
         android:id="@+id/dialogTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:text="Enter your name"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="@font/irish"
         android:paddingBottom="10dp" />
 
     <EditText
         android:id="@+id/editTextPlayerName"
         android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
-        android:hint="Player Name"
+        android:fontFamily="@font/irish"
         android:inputType="textPersonName" />
 
-    <Button
+    <ImageView
         android:id="@+id/buttonSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/submit"
         android:layout_gravity="center" />
 
 </LinearLayout>

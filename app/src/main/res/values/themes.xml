@@ -5,6 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <!-- Remove status bar -->
         <item name="android:windowFullscreen">true</item>
+        <item name="colorButtonNormal">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 

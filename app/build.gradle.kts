@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.gridlayout)
     val nav_version = "2.7.2"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

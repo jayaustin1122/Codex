@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/dialog_background"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
@@ -7,6 +8,9 @@
     <TextView
         android:id="@+id/questionText"
         android:layout_width="match_parent"
+        android:fontFamily="@font/irish"
+        android:padding="10dp"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:text="Question"
         android:textSize="18sp"
@@ -30,6 +34,9 @@
                 android:id="@+id/answerButton1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@null"
+                android:foregroundTint="@null"
+                android:background="@color/transparent"
                 android:layout_margin="4dp"
                 android:text="Answer 1" />
 
@@ -37,6 +44,9 @@
                 android:id="@+id/answerButton3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@null"
+                android:foregroundTint="@null"
+                android:background="@color/transparent"
                 android:layout_margin="4dp"
                 android:text="Answer 3" />
 
@@ -53,13 +63,20 @@
                 android:id="@+id/answerButton2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@null"
+                android:foregroundTint="@null"
+                android:background="@color/transparent"
                 android:layout_margin="4dp"
+
                 android:text="Answer 2" />
 
             <Button
                 android:id="@+id/answerButton4"
                 android:layout_width="match_parent"
+                android:backgroundTint="@null"
+                android:foregroundTint="@null"
                 android:layout_height="wrap_content"
+                android:background="@color/transparent"
                 android:layout_margin="4dp"
                 android:text="Answer 4" />
 

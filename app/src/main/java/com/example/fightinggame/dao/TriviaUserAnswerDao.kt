@@ -18,4 +18,7 @@ interface TriviaUserAnswerDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMultipleTriviaQuestions(trivias: List<TriviaQuestionUserAnswer>)
+    // New method to delete all trivia questions
+    @Query("DELETE FROM trivia_questions_answers")
+    suspend fun deleteAllTriviaQuestions()
 }

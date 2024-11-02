@@ -55,6 +55,11 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             userDao.insertUser(user)
         }
     }
+    fun deleteAllAnswers(){
+        viewModelScope.launch {
+            triviaUserAnswerDao.deleteAllTriviaQuestions()
+        }
+    }
     fun insertQuestionsAnswer(trivias: TriviaQuestionUserAnswer) {
         viewModelScope.launch {
             triviaUserAnswerDao.insertTriviaQuestion(trivias)

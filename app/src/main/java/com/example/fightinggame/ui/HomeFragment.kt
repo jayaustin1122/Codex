@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
         characterDao =CodexDatabase.invoke(requireContext()).getCharacterDao()
         selectionDao =CodexDatabase.invoke(requireContext()).getCharacterSelectionDao()
         playGif()
-        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.samplemusicbg)
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.splash)
         mediaPlayer?.isLooping = true // To loop the music
         mediaPlayer?.start()
         checkSelectedCharacter()
@@ -68,6 +68,7 @@ class HomeFragment : Fragment() {
                     viewModel.updatePoints(UserPoints(1, 0))
                     viewModel.insertUser(User(1, "playerName"))
                     viewModel.insertData()
+                    viewModel.deleteAllAnswers()
                 }
                 overwriteGameProgress()
                 isShown = false
@@ -90,6 +91,7 @@ class HomeFragment : Fragment() {
         val selectCharacterFragment = SelectCharacterFragment()
         selectCharacterFragment.setTargetFragment(this, 0)
         selectCharacterFragment.show(parentFragmentManager, "com.example.fightinggame.ui.SelectCharacterFragment")
+        mediaPlayer?.stop()
     }
 
     private fun overwriteGameProgress() {

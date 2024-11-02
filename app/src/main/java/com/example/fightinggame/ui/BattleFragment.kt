@@ -1,6 +1,7 @@
 package com.example.fightinggame.ui
 
 import android.app.AlertDialog
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -50,7 +51,7 @@ class BattleFragment : Fragment() {
     private lateinit var enemyDao: MonsterEnemyDao
     private var selectedIndex: Int? = null
     private val viewModel: SplashViewModel by viewModels { SplashViewModelFactory(requireContext()) }
-
+    private var mediaPlayer: MediaPlayer? = null
     // Variables to track health and points
     private var monsterHealth = 100
     private var playerHealth = 100
@@ -67,13 +68,9 @@ class BattleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         startTimer()
-        binding.timerText.setOnClickListener {
-            val adjustedIndex = selectedIndex?.plus(1)
-            val bundle = Bundle().apply {
-                putInt("index", adjustedIndex!!)
-            }
-            findNavController().navigate(R.id.reviewFragment, bundle)
-        }
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.battle)
+        mediaPlayer?.isLooping = true // To loop the music
+        mediaPlayer?.start()
         selectedIndex = arguments?.getInt("selected_level_index")
         // Initialize database DAOs
         val characterDao = CodexDatabase.invoke(requireContext()).getCharacterDao()
@@ -129,6 +126,9 @@ class BattleFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         countDownTimer.cancel() // Stop timer when view is destroyed
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
     private val askedQuestionNumbers = mutableListOf<Int>()
