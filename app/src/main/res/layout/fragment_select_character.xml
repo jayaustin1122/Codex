@@ -3,12 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="600dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/dialog_background"
+    android:backgroundTint="@color/transparen"
+    android:background="@color/transparen"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <!-- Title -->
     <TextView
+        android:shadowColor="@android:color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:layout_marginTop="20dp"
+        android:shadowRadius="3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Your Character"
@@ -50,6 +58,7 @@
                 android:text="Hero 1"
                 android:textColor="@color/white"
                 android:textSize="14sp"
+                android:fontFamily="@font/irish"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp" />
@@ -80,6 +89,7 @@
                 android:text="Hero 2"
                 android:textColor="@color/white"
                 android:textSize="14sp"
+                android:fontFamily="@font/irish"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp" />
@@ -110,6 +120,7 @@
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:layout_gravity="center"
+                android:fontFamily="@font/irish"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp" />
         </LinearLayout>
@@ -139,6 +150,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="10dp"
                 android:text="Hero 4"
+                android:fontFamily="@font/irish"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -146,14 +158,16 @@
     </LinearLayout>
 
     <!-- Select Button -->
-    <Button
+    <ImageView
         android:id="@+id/selectButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
         android:text="Select"
+        android:scaleType="fitXY"
+        android:src="@drawable/select"
+        android:layout_gravity="center"
         android:textColor="@color/white"
         android:enabled="false"
-        android:backgroundTint="#654321"
-        android:layout_marginTop="16dp" />
+        />
 
 </LinearLayout>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3D2B1F"
+    android:background="@drawable/bg"
     tools:context=".ui.SplashFragment">
 
     <TextView
@@ -15,8 +15,12 @@
         android:textStyle="bold"
         android:fontFamily="@font/irish"
         android:textSize="50sp"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
         android:layout_gravity="center"
-        android:paddingBottom="20dp" />
+         />
 
     <!-- Horizontal ProgressBar with green color -->
     <ProgressBar
@@ -29,17 +33,38 @@
         android:max="100"
         android:progress="0"
         android:progressDrawable="@drawable/progress_bar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="bottom"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/loading"
+            android:id="@+id/loading"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"/>
+
+        <TextView
+            android:id="@+id/loadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/irish"
+            android:text="Loading..."
+            android:shadowColor="@android:color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
 
     <!-- Loading Text -->
-    <TextView
-        android:id="@+id/loadingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/irish"
-        android:text="Loading..."
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="70dp" />
+
 
 </FrameLayout>

@@ -96,10 +96,10 @@ class SplashViewModel(private val context: Context) : ViewModel() {
 
             val monstersToInsert = listOf(
                 MonsterEnemy(1, 1, R.drawable.hero1, R.drawable.hero1_attack),
-                MonsterEnemy(2, 2, R.drawable.hero1, R.drawable.hero1_attack),
-                MonsterEnemy(3, 3, R.drawable.hero1, R.drawable.hero1_attack),
-                MonsterEnemy(4, 4, R.drawable.hero1, R.drawable.hero1_attack),
-                MonsterEnemy(5, 5, R.drawable.hero1, R.drawable.hero1_attack),
+                MonsterEnemy(2, 2, R.drawable.hero3, R.drawable.hero1_attack),
+                MonsterEnemy(3, 3, R.drawable.hero3, R.drawable.hero1_attack),
+                MonsterEnemy(4, 4, R.drawable.hero4, R.drawable.hero1_attack),
+                MonsterEnemy(5, 5, R.drawable.hero3, R.drawable.hero1_attack),
             )
 
             // Insert monsters

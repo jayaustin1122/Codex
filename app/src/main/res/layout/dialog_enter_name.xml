@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/dialog_background"
+    android:backgroundTint="@color/transparent3"
     android:padding="20dp">
 
     <TextView
@@ -12,6 +13,10 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="Enter your name"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/white"

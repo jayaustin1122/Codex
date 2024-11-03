@@ -1,60 +1,75 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/bg"
     android:gravity="center"
-    android:background="#3D2B1F"
+    android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/irish"
+        android:letterSpacing=".2"
+        android:text="CODEX"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:textColor="@android:color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
-        android:layout_width="400dp"
-        android:layout_height="350dp"
-        android:padding="10dp"
-        android:background="@drawable/dialog_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleText">
         <!-- Title -->
-        <TextView
-            android:id="@+id/titleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CODEX"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:fontFamily="@font/irish"
-            android:layout_marginBottom="10dp"
-            android:textSize="50sp"
-            android:layout_gravity="center"
-            />
+
 
         <!-- Torch Decorations and Buttons in a Horizontal Layout -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
+
                 <ImageView
                     android:id="@+id/torch1"
                     android:layout_width="32dp"
-                    android:layout_marginBottom="16dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/torch"
+                    android:layout_gravity="top"
+                    android:layout_marginBottom="16dp"
                     android:contentDescription="Torch Left"
-                    android:layout_gravity="top" />
+                    android:src="@drawable/torch" />
+
                 <ImageView
                     android:id="@+id/torch3"
                     android:layout_width="32dp"
-                    android:layout_marginBottom="16dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/torch"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="16dp"
                     android:contentDescription="Torch Left"
-                    android:layout_gravity="bottom" />
+                    android:src="@drawable/torch" />
 
             </LinearLayout>
             <!-- Left Torch Image -->
@@ -63,60 +78,62 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <!-- New Run Button -->
                 <ImageView
                     android:id="@+id/newRunButton"
                     android:layout_width="200dp"
-                    android:scaleType="fitXY"
                     android:layout_height="70dp"
+                    android:scaleType="fitXY"
                     android:src="@drawable/newrun" />
                 <!-- Continue Button -->
                 <ImageView
                     android:id="@+id/continueButton"
                     android:layout_width="200dp"
-                    android:scaleType="fitXY"
                     android:layout_height="70dp"
+                    android:scaleType="fitXY"
                     android:src="@drawable/cont" />
 
                 <!-- Exit Button -->
                 <ImageView
                     android:id="@+id/exitButton"
                     android:layout_width="200dp"
-                    android:scaleType="fitXY"
                     android:layout_height="70dp"
+                    android:scaleType="fitXY"
                     android:src="@drawable/exit" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
+
                 <ImageView
                     android:id="@+id/torch4"
                     android:layout_width="32dp"
-                    android:layout_marginBottom="16dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/torch"
+                    android:layout_gravity="top"
+                    android:layout_marginBottom="16dp"
                     android:contentDescription="Torch Left"
-                    android:layout_gravity="top" />
+                    android:src="@drawable/torch" />
+
                 <ImageView
                     android:id="@+id/torch2"
                     android:layout_width="32dp"
-                    android:layout_marginBottom="16dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/torch"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="16dp"
                     android:contentDescription="Torch Left"
-                    android:layout_gravity="bottom" />
+                    android:src="@drawable/torch" />
 
             </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

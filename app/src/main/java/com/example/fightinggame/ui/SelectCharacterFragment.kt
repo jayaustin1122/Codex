@@ -1,5 +1,7 @@
 package com.example.fightinggame.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,13 +37,14 @@ class SelectCharacterFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding = FragmentSelectCharacterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         // Initialize database and CharacterDao
         val characterDao = CodexDatabase.invoke(requireContext()).getCharacterDao()
         characterSelectionDao = CodexDatabase.invoke(requireContext()).getCharacterSelectionDao()

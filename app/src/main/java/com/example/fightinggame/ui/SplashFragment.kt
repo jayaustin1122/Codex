@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.fightinggame.R
 import com.example.fightinggame.databinding.FragmentSplashBinding
 import com.example.fightinggame.util.SplashViewModelFactory
@@ -35,7 +36,10 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.loading)
+            .into(binding.loading)
         handler = Handler(Looper.getMainLooper())
         simulateProgress()
 

@@ -72,6 +72,22 @@ class BattleFragment : Fragment() {
         mediaPlayer?.isLooping = true // To loop the music
         mediaPlayer?.start()
         selectedIndex = arguments?.getInt("selected_level_index")
+        val selectedIndex = arguments?.getInt("selected_level_index") ?: 0
+
+        when (selectedIndex) {
+            1 -> Glide.with(this).asGif().load(R.drawable.bgbattle4).into(binding.battleBackground)
+            2 -> Glide.with(this).asGif().load(R.drawable.bgbattle2).into(binding.battleBackground)
+            3 -> Glide.with(this).asGif().load(R.drawable.bgbattle3).into(binding.battleBackground)
+            4 -> Glide.with(this).asGif().load(R.drawable.bgbattle10).into(binding.battleBackground)
+            5 -> Glide.with(this).asGif().load(R.drawable.bgbattle5).into(binding.battleBackground)
+            6 -> Glide.with(this).asGif().load(R.drawable.bgbattle6).into(binding.battleBackground)
+            7 -> Glide.with(this).asGif().load(R.drawable.bgbattle7).into(binding.battleBackground)
+            8 -> Glide.with(this).asGif().load(R.drawable.bgbattle8).into(binding.battleBackground)
+            9 -> Glide.with(this).asGif().load(R.drawable.bgbattle9).into(binding.battleBackground)
+            10 -> Glide.with(this).asGif().load(R.drawable.bgbattle1).into(binding.battleBackground)
+            else -> Glide.with(this).asGif().load(R.drawable.bgbattle1).into(binding.battleBackground)
+        }
+
         // Initialize database DAOs
         val characterDao = CodexDatabase.invoke(requireContext()).getCharacterDao()
         characterSelectionDao = CodexDatabase.invoke(requireContext()).getCharacterSelectionDao()
@@ -85,7 +101,6 @@ class BattleFragment : Fragment() {
 
         loadCharactersFromDatabase()
         loadEnemyFromDatabase(selectedIndex)
-        Toast.makeText(requireContext(), "$selectedIndex", Toast.LENGTH_SHORT).show()
         updateHealthDisplay()
 
         // Start battle interaction
