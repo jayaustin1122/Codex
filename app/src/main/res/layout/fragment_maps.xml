@@ -94,6 +94,8 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>
     <de.hdodenhof.circleimageview.CircleImageView
@@ -146,4 +148,12 @@
         app:layout_constraintBottom_toBottomOf="@+id/icon"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toBottomOf="@+id/tvLevel" />
+
+    <ImageView
+        android:id="@+id/home"
+        android:layout_width="147dp"
+        android:layout_height="61dp"
+        android:src="@drawable/submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,6 +17,7 @@ data class Trivia(
     val correctAnswerIndex: String,
     val number: Int,
     var isAsked: Boolean = false,
+    var isIdentification: Boolean = false,
 
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0

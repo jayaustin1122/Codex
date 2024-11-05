@@ -9,7 +9,34 @@
         android:id="@+id/questionText"
         android:layout_width="match_parent"
         android:fontFamily="@font/irish"
-        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:text="Question"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/difficulty"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/irish"
+        android:paddingLeft="10dp"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:text="Question"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/irish"
+        android:paddingLeft="10dp"
         android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:shadowColor="@android:color/black"
@@ -103,7 +130,21 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <!-- Submit button -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your answer here"
+        android:fontFamily="@font/irish"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:id="@+id/answerInput"/>
+    <ImageView
+        android:id="@+id/buttonSubmit"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:src="@drawable/submit"
+        android:layout_gravity="center" />
 
 </LinearLayout>

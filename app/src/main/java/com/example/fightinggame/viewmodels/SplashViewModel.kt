@@ -138,7 +138,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "2",
                 ans4 = "-1",
                 number = 1,
-                correctAnswerIndex = "0"
+                correctAnswerIndex = "0",
+                isIdentification = true
             ),
             Trivia(
                 question = "What symbol is used to state the beginning and the end of blocks of code?",
@@ -149,7 +150,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "( and )",
                 ans4 = "< and >",
                 number = 2,
-                correctAnswerIndex = "{ and }"
+                correctAnswerIndex = "{ and }",
+                isIdentification = false
             ),
             Trivia(
                 question = "Which of the following answers is the correct operator to compare two variables?",
@@ -160,7 +162,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "=",
                 ans4 = "&&",
                 number = 3,
-                correctAnswerIndex = "=="
+                correctAnswerIndex = "==",
+                isIdentification = true
             ),
             Trivia(
                 question = "Which of the following shows the correct syntax for an if statement?",
@@ -171,7 +174,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "if <expression>",
                 ans4 = "if expression",
                 number = 4,
-                correctAnswerIndex = "if (expression)" // Answer is if (expression)
+                correctAnswerIndex = "if (expression)",
+                isIdentification = false // Answer is if (expression)
             ),
             Trivia(
                 question = "Which of the following is the boolean operator for logical-and?",
@@ -182,7 +186,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "==",
                 ans4 = "&",
                 number = 5,
-                correctAnswerIndex = "&&" // Answer is &&
+                correctAnswerIndex = "&&", // Answer is &&
+                isIdentification = true
             ),
             Trivia(
                 question = "How do you say 'not equal to?'",
@@ -193,7 +198,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "==",
                 ans4 = "=",
                 number = 6,
-                correctAnswerIndex = "!=" // Answer is !=
+                correctAnswerIndex = "!=", // Answer is !=
+                isIdentification = true
             ),
             Trivia(
                 question = "What symbol is used for not in C++?",
@@ -204,7 +210,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "*/",
                 ans4 = "N",
                 number = 7,
-                correctAnswerIndex = "!" // Answer is !
+                correctAnswerIndex = "!", // Answer is !
+                isIdentification = true
             ),
             Trivia(
                 question = "What does the cin object in C++ do?",
@@ -226,7 +233,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "char",
                 ans4 = "float",
                 number = 9,
-                correctAnswerIndex = "real" // Answer is real
+                correctAnswerIndex = "real", // Answer is real,
+                        isIdentification = false
             ),
             Trivia(
                 question = "Which data type is used to create a variable that should store text?",
@@ -237,7 +245,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "char",
                 ans4 = "txt",
                 number = 11,
-                correctAnswerIndex = "string" // Answer is string
+                correctAnswerIndex = "string",
+                isIdentification = true// Answer is string
             ),
             Trivia(
                 question = "To declare an array in Java, define the variable type with:",
@@ -248,7 +257,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "{}",
                 ans4 = "()",
                 number = 12,
-                correctAnswerIndex = "[]" // Answer is []
+                correctAnswerIndex = "[]",
+                isIdentification = true// Answer is []
             ),
             Trivia(
                 question = "Which operator is used to multiply numbers?",
@@ -259,7 +269,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "/",
                 ans4 = "%",
                 number = 13,
-                correctAnswerIndex = "*" // Answer is *
+                correctAnswerIndex = "*",
+                        isIdentification = true// Answer is *
             ),
             Trivia(
                 question = "Which keyword is used to return a value inside a method?",
@@ -270,7 +281,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "void",
                 ans4 = "get",
                 number = 14,
-                correctAnswerIndex = "return" // Answer is return
+                correctAnswerIndex = "return",
+                isIdentification = true// Answer is return
             ),
             Trivia(
                 question = "Which statement is used to stop a loop?",
@@ -281,7 +293,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "return",
                 ans4 = "end",
                 number = 15,
-                correctAnswerIndex = "break" // Answer is break
+                correctAnswerIndex = "break",
+                isIdentification = true// Answer is break
             ),
             Trivia(
                 question = "Reverse a string in C++.",
@@ -292,7 +305,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "reverse_iterator",
                 ans4 = "s.rbegin() to s.rend()",
                 number = 16,
-                correctAnswerIndex = "std::reverse(s.begin(), s.end());" // Answer is std::reverse(s.begin(), s.end())
+                correctAnswerIndex = "std::reverse(s.begin(), s.end());",
+                isIdentification = false// Answer is std::reverse(s.begin(), s.end())
             ),
             Trivia(
                 question = "Encapsulation for an employee in Java.",
@@ -304,6 +318,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans4 = "super(name, age)",
                 number = 17,
                 correctAnswerIndex = "private String name; ... getters and setters" // Answer is private String name; ... getters and setters
+                ,
+                isIdentification = false
             ),
             Trivia(
                 question = "Factorial using recursion in C++.",
@@ -314,7 +330,9 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "n + factorial(1);",
                 ans4 = "factorial(n + 1);",
                 number = 18,
-                correctAnswerIndex = "int factorial(int n) { return n * factorial(n - 1); }" // Answer is int factorial(int n) { return n * factorial(n - 1); }
+                correctAnswerIndex = "int factorial(int n) { return n * factorial(n - 1); }" // Answer is int factorial(int n) { return n * factorial(n - 1); }.
+                ,
+                isIdentification = false
             ),
             Trivia(
                 question = "Implement a thread using Runnable in Java.",
@@ -326,6 +344,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans4 = "void threadMain()",
                 number = 19,
                 correctAnswerIndex = "class MyThread implements Runnable { run() {...} }" // Answer is class MyThread implements Runnable { run() {...} }
+                ,
+                isIdentification = false
             ),
             Trivia(
                 question = "Swap two numbers using pointers in C++.",
@@ -337,6 +357,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans4 = "std::swap(x, y)",
                 number = 20,
                 correctAnswerIndex = "void swap(int *x, int *y) {...}" // Answer is void swap(int *x, int *y) {...}
+                ,
+                isIdentification = false
             ),
             Trivia(
                 question = "Implement interface for rectangle in Java.",
@@ -347,7 +369,9 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "class Rectangle extends Shape {...}",
                 ans4 = "abstract class Shape {...}",
                 number = 21,
-                correctAnswerIndex = "interface Shape { getArea(); getPerimeter(); } class Rectangle implements Shape {...}" // Answer is interface Shape { getArea(); getPerimeter(); } class Rectangle implements Shape {...}
+                correctAnswerIndex = "interface Shape { getArea(); getPerimeter(); } class Rectangle implements Shape {...}"
+                ,
+                isIdentification = false// Answer is interface Shape { getArea(); getPerimeter(); } class Rectangle implements Shape {...}
             ),
             Trivia(
                 question = "GCD of two numbers using Euclid's algorithm in C++.",
@@ -358,7 +382,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "for(a != 0 && b != 0)",
                 ans4 = "a * b;",
                 number = 22,
-                correctAnswerIndex = "int gcd(int a, int b) {...}" // Answer is int gcd(int a, int b) {...}
+                correctAnswerIndex = "int gcd(int a, int b) {...}",
+                isIdentification = false // Answer is int gcd(int a, int b) {...}
             ),
             Trivia(
                 question = "Convert binary string to decimal in Java.",
@@ -369,7 +394,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "Double.parseDouble(binaryString);",
                 ans4 = "binaryString.charAt(0);",
                 number = 23,
-                correctAnswerIndex = "Integer.parseInt(binaryString, 2);" // Answer is Integer.parseInt(binaryString, 2);
+                correctAnswerIndex = "Integer.parseInt(binaryString, 2);",
+                isIdentification = false // Answer is Integer.parseInt(binaryString, 2);
             ),
 
             Trivia(
@@ -381,7 +407,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "reverseString(s)",
                 ans4 = "while(left < right)",
                 number = 24,
-                correctAnswerIndex = "return s == string(s.rbegin(), s.rend());"
+                correctAnswerIndex = "return s == string(s.rbegin(), s.rend());",
+                isIdentification = false
             ),
 
             Trivia(
@@ -393,7 +420,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "addNumbers(int a, int b)",
                 ans4 = "this.add(int a, int b)",
                 number = 25,
-                correctAnswerIndex = "void add(int a, int b) {...} void add(double a, b) {...}"
+                correctAnswerIndex = "void add(int a, int b) {...} void add(double a, b) {...}",
+                isIdentification = false
             ),
 
             Trivia(
@@ -405,7 +433,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "reverse(arr.begin(), arr.end())",
                 ans4 = "while(a < b)",
                 number = 26,
-                correctAnswerIndex = "std::sort(arr.begin(), arr.end(), [](int a, int b) {...});"
+                correctAnswerIndex = "std::sort(arr.begin(), arr.end(), [](int a, int b) {...});",
+                isIdentification = false
             ),
 
             Trivia(
@@ -417,7 +446,9 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "Car super Vehicle {...}",
                 ans4 = "Vehicle(Car car)",
                 number = 27,
-                correctAnswerIndex = "class Car extends Vehicle {...}"
+                correctAnswerIndex = "class Car extends Vehicle {...}",
+                isIdentification = false
+
             ),
 
             Trivia(
@@ -429,7 +460,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "void PrintBase()",
                 ans4 = "cout << \"Base\";",
                 number = 28,
-                correctAnswerIndex = "virtual void print() {...}"
+                correctAnswerIndex = "virtual void print() {...}",
+                isIdentification = false
             ),
 
             Trivia(
@@ -441,7 +473,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "read(file).lineByLine()",
                 ans4 = "while(file.hasNextLine())",
                 number = 29,
-                correctAnswerIndex = "BufferedReader reader = new BufferedReader(...);"
+                correctAnswerIndex = "BufferedReader reader = new BufferedReader(...);",
+                isIdentification = false
             ),
 
             Trivia(
@@ -453,7 +486,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "void operator+(Complex& c)",
                 ans4 = "addComplex(Complex& c)",
                 number = 30,
-                correctAnswerIndex = "Complex operator+(const Complex& c) {...}"
+                correctAnswerIndex = "Complex operator+(const Complex& c) {...}",
+                isIdentification = false
             ),
             Trivia(
                 question = "Write a program to print 'Hello, World!' in C++.",
@@ -464,7 +498,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "cout << Hello << World;",
                 ans4 = "std::print(\"Hello\");",
                 number = 31,
-                correctAnswerIndex = "std::cout << \"Hello, World!\";"
+                correctAnswerIndex = "std::cout << \"Hello, World!\";",
+                isIdentification = false
             ),
 
             Trivia(
@@ -476,7 +511,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "println(\"Hello, World!\");",
                 ans4 = "out.println(\"Hello\");",
                 number = 32,
-                correctAnswerIndex = "System.out.println(\"Hello, World!\");"
+                correctAnswerIndex = "System.out.println(\"Hello, World!\");",
+                isIdentification = false
             ),
 
             Trivia(
@@ -488,7 +524,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "multiply(a, b);",
                 ans4 = "for(a + b);",
                 number = 33,
-                correctAnswerIndex = "int sum(int a, int b) { return a + b; }"
+                correctAnswerIndex = "int sum(int a, int b) { return a + b; }",
+                isIdentification = false
             ),
 
             Trivia(
@@ -500,7 +537,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "System.out.print(a - b);",
                 ans4 = "sum(a, b) == a - b;",
                 number = 34,
-                correctAnswerIndex = "int sum(int a, int b) { return a + b; }"
+                correctAnswerIndex = "int sum(int a, int b) { return a + b; }",
+                isIdentification = false
             ),
 
             Trivia(
@@ -512,7 +550,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "max(a, b);",
                 ans4 = "return a - b;",
                 number = 35,
-                correctAnswerIndex = "return (a > b) ? a : b;"
+                correctAnswerIndex = "return (a > b) ? a : b;",
+                isIdentification = false
             ),
 
             Trivia(
@@ -524,7 +563,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "Math.min(a, b);",
                 ans4 = "System.out.max(a, b);",
                 number = 36,
-                correctAnswerIndex = "return Math.max(a, b);"
+                correctAnswerIndex = "return Math.max(a, b);",
+                isIdentification = false
             ),
 
             Trivia(
@@ -536,7 +576,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "return n / 2 == 0;",
                 ans4 = "return n * 2 == 0;",
                 number = 37,
-                correctAnswerIndex = "return n % 2 == 0;"
+                correctAnswerIndex = "return n % 2 == 0;",
+                isIdentification = false
             ),
 
             Trivia(
@@ -548,7 +589,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "if(n / 2 == 0)",
                 ans4 = "if(n * 2 == 0)",
                 number = 38,
-                correctAnswerIndex = "return n % 2 == 0;"
+                correctAnswerIndex = "return n % 2 == 0;",
+                isIdentification = false
             ),
 
             Trivia(
@@ -560,7 +602,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "squareRoot(n);",
                 ans4 = "return n + n;",
                 number = 39,
-                correctAnswerIndex = "return n * n;"
+                correctAnswerIndex = "return n * n;",
+                isIdentification = false
             ),
 
             Trivia(
@@ -572,7 +615,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "return n / n;",
                 ans4 = "return n + n;",
                 number = 40,
-                correctAnswerIndex = "return n * n;"
+                correctAnswerIndex = "return n * n;",
+                isIdentification = false
             ),
 
             Trivia(
@@ -584,7 +628,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "a + b = 0;",
                 ans4 = "a * b;",
                 number = 41,
-                correctAnswerIndex = "swap(a, b);"
+                correctAnswerIndex = "swap(a, b);",
+                isIdentification = false
             ),
 
             Trivia(
@@ -596,7 +641,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "a = b;",
                 ans4 = "a + b = 0;",
                 number = 42,
-                correctAnswerIndex = "temp = a; a = b; b = temp;"
+                correctAnswerIndex = "temp = a; a = b; b = temp;",
+                isIdentification = false
             ),
 
             Trivia(
@@ -608,7 +654,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "n == 0;",
                 ans4 = "n * -1;",
                 number = 43,
-                correctAnswerIndex = "return n > 0;"
+                correctAnswerIndex = "return n > 0;",
+                isIdentification = false
             ),
 
             Trivia(
@@ -620,7 +667,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "if(n == 0)",
                 ans4 = "n * -1;",
                 number = 44,
-                correctAnswerIndex = "return n > 0;"
+                correctAnswerIndex = "return n > 0;",
+                isIdentification = false
             ),
 
             Trivia(
@@ -632,7 +680,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 ans3 = "do{i++}",
                 ans4 = "i += 10;",
                 number = 45,
-                correctAnswerIndex = "for(int i=1; i<=10; i++) cout << i;"
+                correctAnswerIndex = "for(int i=1; i<=10; i++) cout << i;",
+                isIdentification = false
             )
         )
         triviaDao.insertTrivia(triviaList)
