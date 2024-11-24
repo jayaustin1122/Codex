@@ -81,10 +81,10 @@ class SplashViewModel(private val context: Context) : ViewModel() {
     fun insertData() {
         viewModelScope.launch(Dispatchers.IO) {
             val charactersToInsert = listOf(
-                Character(1, "Hero1", 1, R.drawable.hero1, R.drawable.hero1_attack),
-                Character(2, "Hero2", 1, R.drawable.hero2, R.drawable.hero1_attack),
-                Character(3, "Hero3", 1, R.drawable.hero3, R.drawable.hero1_attack),
-                Character(4, "Hero4", 1, R.drawable.hero4, R.drawable.hero1_attack)
+                Character(1, "Alucardo", 1, R.drawable.hero1, R.drawable.hero1_attack),
+                Character(2, "Boy-Boy", 1, R.drawable.boy_stance, R.drawable.boy_attack),
+                Character(3, "Hero Gold", 1, R.drawable.golden_knight_stance, R.drawable.golden_knight_attack),
+                Character(4, "Mage", 1, R.drawable.mage_stance, R.drawable.mage_attack)
             )
 
             // Insert characters
@@ -95,11 +95,16 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             }
 
             val monstersToInsert = listOf(
-                MonsterEnemy(1, 1, R.drawable.hero1, R.drawable.hero1_attack),
-                MonsterEnemy(2, 2, R.drawable.hero3, R.drawable.hero1_attack),
-                MonsterEnemy(3, 3, R.drawable.hero3, R.drawable.hero1_attack),
-                MonsterEnemy(4, 4, R.drawable.hero4, R.drawable.hero1_attack),
-                MonsterEnemy(5, 5, R.drawable.hero3, R.drawable.hero1_attack),
+                MonsterEnemy(1, 1, R.drawable.monster1_stance, R.drawable.monster1_attack),
+                MonsterEnemy(2, 2, R.drawable.tree_monster_attack, R.drawable.tree_monster_attack),
+                MonsterEnemy(3, 3, R.drawable.silver_knight_stance, R.drawable.silver_knight_attack),
+                MonsterEnemy(4, 4, R.drawable.knight_stance, R.drawable.knight_attack),
+                MonsterEnemy(5, 5, R.drawable.girl2_stance, R.drawable.girl2_attack),
+                MonsterEnemy(6, 6, R.drawable.hero1, R.drawable.hero1_attack),
+                MonsterEnemy(7, 7, R.drawable.boy_stance, R.drawable.boy_attack),
+                MonsterEnemy(8, 8, R.drawable.hero1, R.drawable.hero1_attack),
+                MonsterEnemy(9, 9, R.drawable.mage_stance, R.drawable.mage_attack),
+                MonsterEnemy(10, 10, R.drawable.dragon_stance, R.drawable.dragon_attack),
             )
 
             // Insert monsters
@@ -116,6 +121,11 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 mapsLevel(false, false, 3),
                 mapsLevel(false, false, 4),
                 mapsLevel(false, false, 5),
+                mapsLevel(false, false, 6),
+                mapsLevel(false, false, 7),
+                mapsLevel(false, false, 8),
+                mapsLevel(false, false, 9),
+                mapsLevel(false, false, 10),
             )
 
             // Insert trivia

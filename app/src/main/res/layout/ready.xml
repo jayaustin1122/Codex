@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_background"
+    android:backgroundTint="@color/transparent3"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tv_ready_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Battle?"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingBottom="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btn_yes"
+            android:backgroundTint="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/btn_no"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

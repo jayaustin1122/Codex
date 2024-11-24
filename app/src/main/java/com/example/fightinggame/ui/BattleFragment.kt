@@ -24,11 +24,15 @@ import com.example.fightinggame.dao.LevelsDao
 import com.example.fightinggame.dao.MonsterEnemyDao
 import com.example.fightinggame.dao.TriviaDao
 import com.example.fightinggame.dao.UserPointsDao
+import com.example.fightinggame.databinding.DefendBinding
+import com.example.fightinggame.databinding.DialogEnterNameBinding
 import com.example.fightinggame.databinding.DialogQuestionBinding
 import com.example.fightinggame.databinding.FragmentBattleBinding
+import com.example.fightinggame.databinding.ReadyBinding
 import com.example.fightinggame.db.CodexDatabase
 import com.example.fightinggame.model.Trivia
 import com.example.fightinggame.model.TriviaQuestionUserAnswer
+import com.example.fightinggame.model.User
 import com.example.fightinggame.model.UserPoints
 import com.example.fightinggame.model.mapsLevel
 import com.example.fightinggame.util.CharacterViewModelFactory
@@ -101,10 +105,59 @@ class BattleFragment : Fragment() {
         loadEnemyFromDatabase(selectedIndex)
         updateHealthDisplay()
 
+        dialogStart()
 
-        showQuestionDialog()
+    }
+    private fun dialogStart() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                // Use ViewBinding to inflate the custom layout
+                val binding = ReadyBinding.inflate(LayoutInflater.from(requireContext()))
 
+                // Create the AlertDialog
+                val dialog = AlertDialog.Builder(requireContext())
+                    .setView(binding.root)
+                    .create()
 
+                // Handle the submit button click
+                binding.btnYes.setOnClickListener {
+
+                    showQuestionDialog()
+                    dialog.dismiss()
+                }
+                binding.btnNo.setOnClickListener {
+                    findNavController().navigate(R.id.mapsFragment)
+                }
+
+                // Show the dialog
+                dialog.show()
+
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+    private fun showDefendDialog() {
+        val defendDialogBinding =
+            DefendBinding.inflate(LayoutInflater.from(requireContext())) // Inflate a custom dialog layout for defending
+
+        val defendDialog = AlertDialog.Builder(requireContext())
+            .setView(defendDialogBinding.root)
+            .setCancelable(false)
+            .create()
+
+        defendDialogBinding.btnYes.setOnClickListener {
+            defendDialog.dismiss() // Dismiss the defend dialog when clicked
+            Handler(Looper.getMainLooper()).postDelayed({
+                showQuestionDialog() // Show the next question dialog after dismissing the defend dialog
+            }, 500) // Add a short delay to give a smooth transition
+        }
+        defendDialogBinding.btnNo.setOnClickListener {
+            defendDialog.dismiss() // Dismiss the defend dialog when clicked
+            findNavController().navigate(R.id.mapsFragment)
+        }
+
+        defendDialog.show() // Show the defend dialog
     }
 
     private fun loadEnemyFromDatabase(selectedIndex: Int?) {
@@ -236,7 +289,9 @@ class BattleFragment : Fragment() {
                                         "PlayerPoints",
                                         "Current Player Points: $playerPoints"
                                     ) // Log the updated points
-
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        showQuestionDialog()
+                                    }, 2000)
                                     shakeScreen()
                                     viewLifecycleOwner.lifecycleScope.launch {
                                         triviaDao.markQuestionAsAskedById(question.number)
@@ -288,7 +343,10 @@ class BattleFragment : Fragment() {
                                         )
                                     )
                                     shakeScreen()
-
+                                    questionDialog?.dismiss()
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        showDefendDialog()
+                                    }, 1000)
                                     if (playerHealth <= 0) {
                                         Toast.makeText(
                                             requireContext(),
@@ -305,9 +363,7 @@ class BattleFragment : Fragment() {
 
                                 // Update health display and show the next question
                                 updateHealthDisplay()
-                                Handler(Looper.getMainLooper()).postDelayed({
-                                    showQuestionDialog()
-                                }, 2000)
+
                             }
                         }
 
@@ -344,7 +400,9 @@ class BattleFragment : Fragment() {
                     "PlayerPoints",
                     "Current Player Points: $playerPoints"
                 ) // Log the updated points
-
+                Handler(Looper.getMainLooper()).postDelayed({
+                    showQuestionDialog()
+                }, 2000)
                 shakeScreen()
                 viewLifecycleOwner.lifecycleScope.launch {
                     triviaDao.markQuestionAsAskedById(question.number)
@@ -382,6 +440,7 @@ class BattleFragment : Fragment() {
                     "Wrong! Your health decreases by $healthDeduction.",
                     Toast.LENGTH_SHORT
                 ).show()
+                questionDialog?.dismiss()
                 listOfQuestionAnswers.add(
                     TriviaQuestionUserAnswer(
                         question = question.question,
@@ -395,8 +454,11 @@ class BattleFragment : Fragment() {
                         userSelectAnswer = answer
                     )
                 )
-                shakeScreen()
 
+                shakeScreen()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    showDefendDialog()
+                }, 1000)
                 if (playerHealth <= 0) {
                     Toast.makeText(
                         requireContext(),
@@ -413,9 +475,6 @@ class BattleFragment : Fragment() {
 
             // Update health display and show the next question
             updateHealthDisplay()
-            Handler(Looper.getMainLooper()).postDelayed({
-                showQuestionDialog()
-            }, 2000)
         }
     }
 
@@ -572,7 +631,7 @@ class BattleFragment : Fragment() {
                 displaySelectedCharacterGifAttackEnemy(it.gifAttack!!)
                 Handler(Looper.getMainLooper()).postDelayed({
                     displaySelectedCharacterGifEnemy(it.gifStand!!)
-                }, 2000)
+                }, 3000)
             }
         }
     }
@@ -590,7 +649,7 @@ class BattleFragment : Fragment() {
                 displaySelectedCharacterGifAttack(it.gifAttack!!)
                 Handler(Looper.getMainLooper()).postDelayed({
                     displaySelectedCharacterGif(it.gifStand!!)
-                }, 2000)
+                }, 3000)
             }
         }
     }

@@ -169,6 +169,11 @@ class MapsFragment : Fragment() {
             binding.level3Marker,
             binding.level4Marker,
             binding.level5Marker,
+            binding.level6Marker,
+            binding.level7Marker,
+            binding.level8Marker,
+            binding.level9Marker,
+            binding.level10Marker,
         )
 
         for ((index, level) in levels.withIndex()) {
@@ -177,20 +182,24 @@ class MapsFragment : Fragment() {
 
                 if (level.status) {
                     if (level.isFinish) {
-                        // If the level is finished, show a GIF and navigate to ReviewFragment
-                        playFinishedLevelGif(markerView)
-                        markerView.setOnClickListener {
-                            Toast.makeText(
-                                requireContext(),
-                                "This level is already finished.",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                        if (index == 9) { // Checking if it's level 10 (index 9 because the list is 0-based)
+                            showCongratulationsDialog() // Show the dialog if level 10 is finished
+                        } else {
+                            // If the level is finished, show a GIF and navigate to ReviewFragment
+                            playFinishedLevelGif(markerView)
+                            markerView.setOnClickListener {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "This level is already finished.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
-                            // Navigate to the ReviewFragment with the selected index
-                            val bundle = Bundle().apply {
-                                putInt("index", index + 1) // Pass the current index + 1
+                                // Navigate to the ReviewFragment with the selected index
+                                val bundle = Bundle().apply {
+                                    putInt("index", index + 1) // Pass the current index + 1
+                                }
+                                findNavController().navigate(R.id.reviewFragment, bundle)
                             }
-                            findNavController().navigate(R.id.reviewFragment, bundle)
                         }
                     } else {
                         // If the level is unlocked but not finished, show a GIF and navigate to BattleFragment
@@ -216,6 +225,18 @@ class MapsFragment : Fragment() {
             }
         }
     }
+
+    // Function to show congratulations dialog
+    private fun showCongratulationsDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Congratulations!")
+            .setMessage("You have cleared all the levels of the game!")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
 
 
     // Play GIF on unlocked levels

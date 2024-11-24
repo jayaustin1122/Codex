@@ -69,6 +69,62 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/level6Marker"
+                android:layout_width="59dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="252dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/locked_level"
+                app:layout_constraintStart_toEndOf="@+id/level5Marker"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/level7Marker"
+                android:layout_width="59dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="252dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/locked_level"
+                app:layout_constraintStart_toEndOf="@+id/level6Marker"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/level8Marker"
+                android:layout_width="59dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="252dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/locked_level"
+                app:layout_constraintStart_toEndOf="@+id/level7Marker"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/level9Marker"
+                android:layout_width="59dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="252dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/locked_level"
+                app:layout_constraintStart_toEndOf="@+id/level8Marker"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/level10Marker"
+                android:layout_width="59dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="252dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/locked_level"
+                app:layout_constraintStart_toEndOf="@+id/level9Marker"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
                 android:id="@+id/level3Marker"
                 android:layout_width="59dp"
                 android:layout_height="52dp"
@@ -106,7 +162,7 @@
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/frame_profile"
+        android:src="@drawable/ssf"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -151,9 +207,10 @@
 
     <ImageView
         android:id="@+id/home"
-        android:layout_width="147dp"
-        android:layout_height="61dp"
-        android:src="@drawable/submit"
+        android:layout_width="110dp"
+        android:layout_height="54dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
