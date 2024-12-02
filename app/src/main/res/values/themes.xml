@@ -1,22 +1,39 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.FightingGame" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <!-- Remove status bar -->
+        <!-- Set default text and primary text color to white for light and dark themes -->
+        <item name="android:textColorPrimary">#FFFFFF</item>  <!-- Text color for primary text -->
+        <item name="android:textColorSecondary">#FFFFFF</item> <!-- Text color for secondary text -->
+
+        <!-- Set primary color to white for better contrast on darker backgrounds -->
+        <item name="colorPrimary">#FFFFFF</item>  <!-- Primary color (e.g., for buttons, highlights) -->
+        <item name="colorPrimaryVariant">#FFFFFF</item> <!-- Lighter shade of primary color -->
+        <item name="colorOnPrimary">#000000</item>  <!-- Text color on primary color (e.g., button text) -->
+
+        <!-- Ensure the status bar is removed (fullscreen) -->
         <item name="android:windowFullscreen">true</item>
-        <item name="colorButtonNormal">@android:color/transparent</item>
+
+        <!-- Remove title in the window -->
         <item name="android:windowNoTitle">true</item>
+
+        <!-- Optional: set background to black or dark background if desired -->
+        <item name="android:windowBackground">@android:color/black</item>
+
+        <!-- Customize the button color for better visibility on dark backgrounds -->
+        <item name="colorButtonNormal">@android:color/white</item>
     </style>
 
-    <style name="Theme.FightingGame" parent="Base.Theme.FightingGame" />
-    <!-- res/values/styles.xml -->
+    <style name="Theme.FightingGame" parent="Base.Theme.FightingGame">
+        <!-- Additional customization for the game theme can go here -->
+    </style>
 
-        <style name="CustomAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
-            <!-- Customize title text color -->
-            <item name="android:textColorPrimary">#FFFFFF</item>
-            <!-- Customize message text color -->
-            <item name="android:textColor">#FFFFFF</item>
-            <!-- Customize button text color -->
-        </style>
+    <!-- Custom AlertDialog Theme -->
+    <style name="CustomAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <!-- Customize title text color -->
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <!-- Customize message text color -->
+        <item name="android:textColor">#FFFFFF</item>
+        <!-- Customize button text color -->
+        <item name="buttonStyle">@android:color/white</item> <!-- Button text color -->
+    </style>
 </resources>

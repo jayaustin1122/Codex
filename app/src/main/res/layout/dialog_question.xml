@@ -1,150 +1,164 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@drawable/dialog_background"
-    android:layout_height="wrap_content"
+    android:layout_height="250dp"
     android:orientation="vertical"
     android:padding="16dp">
-
-    <TextView
-        android:id="@+id/questionText"
-        android:layout_width="match_parent"
-        android:fontFamily="@font/irish"
-        android:paddingLeft="10dp"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="3"
-        android:text="Question"
-        android:textSize="18sp" />
-    <TextView
-        android:id="@+id/difficulty"
-        android:layout_width="match_parent"
-        android:fontFamily="@font/irish"
-        android:paddingLeft="10dp"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="3"
-        android:text="Question"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/category"
-        android:layout_width="match_parent"
-        android:fontFamily="@font/irish"
-        android:paddingLeft="10dp"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="3"
-        android:text="Question"
-        android:textSize="18sp"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Outer LinearLayout for vertical arrangement of button sets -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
-
-        <!-- First vertical set of buttons -->
+        android:scrollbars="none"
+        >
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="vertical">
-
-            <Button
-                android:id="@+id/answerButton1"
+            <TextView
+                android:id="@+id/questionText"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/irish"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
                 android:shadowColor="@android:color/black"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="3"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@null"
-                android:foregroundTint="@null"
-                android:background="@color/transparent"
-                android:layout_margin="4dp"
-                android:text="Answer 1" />
-
-            <Button
-                android:id="@+id/answerButton3"
+                android:text="Question"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/difficulty"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/irish"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@null"
-                android:foregroundTint="@null"
                 android:shadowColor="@android:color/black"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="3"
-                android:background="@color/transparent"
-                android:layout_margin="4dp"
-                android:text="Answer 3" />
+                android:text="Question"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/irish"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:text="Question"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Outer LinearLayout for vertical arrangement of button sets -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <!-- First vertical set of buttons -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/answerButton1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/button"
+                        android:backgroundTint="@null"
+                        android:foregroundTint="@null"
+                        android:shadowColor="@android:color/black"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:textColor="@color/white"
+                        android:shadowRadius="3"
+                        android:text="Answer 1" />
+
+                    <Button
+                        android:id="@+id/answerButton3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/button"
+                        android:backgroundTint="@null"
+                        android:foregroundTint="@null"
+                        android:shadowColor="@android:color/black"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:textColor="@color/white"
+                        android:shadowRadius="3"
+                        android:text="Answer 1" />
+
+                </LinearLayout>
+
+                <!-- Second vertical set of buttons -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/answerButton2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/button"
+                        android:backgroundTint="@null"
+                        android:foregroundTint="@null"
+                        android:shadowColor="@android:color/black"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:textColor="@color/white"
+                        android:shadowRadius="3"
+                        android:text="Answer 1" />
+
+                    <Button
+                        android:id="@+id/answerButton4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/button"
+                        android:backgroundTint="@null"
+                        android:foregroundTint="@null"
+                        android:shadowColor="@android:color/black"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:textColor="@color/white"
+                        android:shadowRadius="3"
+                        android:text="Answer 1" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your answer here"
+                android:fontFamily="@font/irish"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:id="@+id/answerInput"/>
+            <ImageView
+                android:id="@+id/buttonSubmit"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:scaleType="fitXY"
+                android:visibility="gone"
+                android:src="@drawable/submit"
+                android:layout_gravity="center" />
 
         </LinearLayout>
-
-        <!-- Second vertical set of buttons -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/answerButton2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@null"
-                android:shadowColor="@android:color/black"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="3"
-                android:foregroundTint="@null"
-                android:background="@color/transparent"
-                android:layout_margin="4dp"
-
-                android:text="Answer 2" />
-
-            <Button
-                android:id="@+id/answerButton4"
-                android:layout_width="match_parent"
-                android:backgroundTint="@null"
-                android:shadowColor="@android:color/black"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="3"
-                android:foregroundTint="@null"
-                android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:layout_margin="4dp"
-                android:text="Answer 4" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your answer here"
-        android:fontFamily="@font/irish"
-        android:textColor="@color/white"
-        android:visibility="gone"
-        android:id="@+id/answerInput"/>
-    <ImageView
-        android:id="@+id/buttonSubmit"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:scaleType="fitXY"
-        android:visibility="gone"
-        android:src="@drawable/submit"
-        android:layout_gravity="center" />
+    </ScrollView>
 
 </LinearLayout>

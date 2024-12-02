@@ -38,6 +38,7 @@ class MapsFragment : Fragment() {
     private lateinit var userPointsDao: UserPointsDao
     private var mediaPlayer: MediaPlayer? = null
     private var isShown = false
+    var score : Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,12 +62,14 @@ class MapsFragment : Fragment() {
         levelsViewModel = ViewModelProvider(this, factory).get(LevelsViewModel::class.java)
         getUserName()
         showLevels()
+
         if (!isShown) {
             dialogOpenEnterName()
 
         }
         binding.home.setOnClickListener(){
-            findNavController().navigate(R.id.homeFragment)
+
+           findNavController().navigate(R.id.homeFragment)
         }
 
     }
@@ -89,12 +92,13 @@ class MapsFragment : Fragment() {
             }
         }
     }
-    fun getPointUser(){
+    private fun getPointUser(){
         viewLifecycleOwner.lifecycleScope.launch {
             val points = userPointsDao.getUserPoints(1)
 
             if (points != null ) {
                     binding.tvPoints.text = "Points: ${points.points}"
+                score = points.points
             } else {
                 binding.tvPoints.text = "Points: 0"
             }
@@ -130,6 +134,7 @@ class MapsFragment : Fragment() {
                             ).show()
                             dialog.dismiss() // Close the dialog
                             getUserName()
+
                             showDungeonAdventureDialog(requireContext())
                         } catch (e: Exception) {
                             Log.e("DialogError", "Error saving player name: ${e.message}", e)
@@ -174,6 +179,26 @@ class MapsFragment : Fragment() {
             binding.level8Marker,
             binding.level9Marker,
             binding.level10Marker,
+            binding.level11Marker,
+            binding.level12Marker,
+            binding.level13Marker,
+            binding.level14Marker,
+            binding.level15Marker,
+            binding.level16Marker,
+            binding.level17Marker,
+            binding.level18Marker,
+            binding.level19Marker,
+            binding.level20Marker,
+            binding.level21Marker,
+            binding.level22Marker,
+            binding.level23Marker,
+            binding.level24Marker,
+            binding.level25Marker,
+            binding.level26Marker,
+            binding.level27Marker,
+            binding.level28Marker,
+            binding.level29Marker,
+            binding.level30Marker,
         )
 
         for ((index, level) in levels.withIndex()) {
@@ -182,7 +207,7 @@ class MapsFragment : Fragment() {
 
                 if (level.status) {
                     if (level.isFinish) {
-                        if (index == 9) { // Checking if it's level 10 (index 9 because the list is 0-based)
+                        if (index == 29) { // Checking if it's level 10 (index 9 because the list is 0-based)
                             showCongratulationsDialog() // Show the dialog if level 10 is finished
                         } else {
                             // If the level is finished, show a GIF and navigate to ReviewFragment
@@ -228,14 +253,22 @@ class MapsFragment : Fragment() {
 
     // Function to show congratulations dialog
     private fun showCongratulationsDialog() {
+        Log.d("Dialog", "Showing congratulations dialog") // Add this line for debugging
+
         AlertDialog.Builder(requireContext())
-            .setTitle("Congratulations!")
-            .setMessage("You have cleared all the levels of the game!")
-            .setPositiveButton("OK") { dialog, _ ->
+            .setTitle("🎉 Congratulations! 🎉")
+            .setMessage(
+                "Amazing work! You've earned a total of $score points!\n\n" +
+                        "🎯 You've cleared all the levels of Logic Quests! 🎯"
+            )
+            .setPositiveButton("Awesome!") { dialog, _ ->
                 dialog.dismiss()
             }
+
             .show()
+
     }
+
 
 
 
@@ -271,6 +304,7 @@ class MapsFragment : Fragment() {
             .setPositiveButton("Continue") { dialog, _ ->
                 dialog.dismiss()
                 isShown = true
+
                 sharedPreferences.edit().putBoolean("isShown", isShown).apply()
             }
             .setNegativeButton("Exit") { dialog, _ -> findNavController().navigateUp() }

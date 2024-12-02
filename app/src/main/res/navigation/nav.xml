@@ -34,4 +34,8 @@
         android:name="com.example.fightinggame.ui.ReviewFragment"
         android:label="fragment_review"
         tools:layout="@layout/fragment_review" />
+    <fragment
+        android:id="@+id/webFragment"
+        android:name="com.example.fightinggame.ui.WebFragment"
+        android:label="WebFragment" />
 </navigation>

@@ -10,7 +10,7 @@
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CODEX"
+        android:text="Logic Quest"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:fontFamily="@font/irish"

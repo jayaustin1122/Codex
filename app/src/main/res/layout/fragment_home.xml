@@ -13,10 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/irish"
-        android:letterSpacing=".2"
-        android:text="CODEX"
+        android:text="Logic Quest"
         android:shadowColor="@android:color/black"
         android:shadowDx="2"
         android:shadowDy="2"
@@ -86,25 +85,31 @@
                 <!-- New Run Button -->
                 <ImageView
                     android:id="@+id/newRunButton"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/newrun" />
                 <!-- Continue Button -->
                 <ImageView
                     android:id="@+id/continueButton"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/cont" />
-
+                <ImageView
+                    android:id="@+id/ins"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ins" />
                 <!-- Exit Button -->
                 <ImageView
                     android:id="@+id/exitButton"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
+                    android:layout_width="180dp"
+                    android:layout_height="50dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/exit" />
+
             </LinearLayout>
 
             <LinearLayout

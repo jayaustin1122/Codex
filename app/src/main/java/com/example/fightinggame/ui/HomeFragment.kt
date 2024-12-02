@@ -1,5 +1,6 @@
 package com.example.fightinggame.ui
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.media.MediaPlayer
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -65,7 +68,7 @@ class HomeFragment : Fragment() {
             if (binding.continueButton.visibility == View.VISIBLE) {
 
                 viewLifecycleOwner.lifecycleScope.launch {
-                    viewModel.updatePoints(UserPoints(1, 0))
+                    viewModel.updatePoints(UserPoints(1, 100))
                     viewModel.insertUser(User(1, "playerName"))
                     viewModel.insertData()
                     viewModel.deleteAllAnswers()
@@ -85,8 +88,57 @@ class HomeFragment : Fragment() {
         binding.continueButton.setOnClickListener {
             findNavController().navigate(R.id.mapsFragment)
         }
+        binding.ins.setOnClickListener {
+            openDialog()
+        }
 
     }
+
+    private fun openDialog() {
+        val languages = arrayOf("Java", "C++")
+
+        // Create a custom adapter to set the item layout
+        val adapter = object : ArrayAdapter<String>(requireContext(), R.layout.dialog_list_item, languages) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                val textView = view.findViewById<TextView>(R.id.dialogItem)
+                textView.text = languages[position]
+                return view
+            }
+        }
+
+        val dialogBuilder = AlertDialog.Builder(context, R.style.CustomAlertDialogTheme)
+            .setTitle("Select a language")
+            .setAdapter(adapter) { dialog, which ->
+                val selectedLanguage = languages[which]
+                openWebFragment(selectedLanguage) // Pass the selected language
+                dialog.dismiss()
+            }
+            .setNegativeButton("Exit") { dialog, _ ->
+                dialog.dismiss()
+            }
+
+        val dialog = dialogBuilder.create()
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+
+        dialog.show()
+    }
+
+
+    private fun openWebFragment(selectedLanguage: String) {
+        val url = when (selectedLanguage) {
+            "Java" -> "https://www.w3schools.com/java/"
+            "C++" -> "https://www.w3schools.com/cpp/"
+            else -> "https://www.example.com"
+        }
+
+        val bundle = Bundle().apply {
+            putString("url", url)
+        }
+        findNavController().navigate(R.id.webFragment, bundle)
+    }
+
+
     private fun openSelectCharacterFragment() {
         val selectCharacterFragment = SelectCharacterFragment()
         selectCharacterFragment.setTargetFragment(this, 0)

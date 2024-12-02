@@ -388,6 +388,7 @@ class BattleFragment : Fragment() {
 
             val answer = dialogBinding.answerInput.text.toString().trim()
             if (answer == question.correctAnswerIndex) {
+                // Correct answer
                 monsterHealth -= healthDeduction
                 Toast.makeText(
                     requireContext(),
@@ -396,13 +397,12 @@ class BattleFragment : Fragment() {
                 ).show()
                 playerPoints++ // Increment points
                 questionDialog?.dismiss()
-                Log.d(
-                    "PlayerPoints",
-                    "Current Player Points: $playerPoints"
-                ) // Log the updated points
+                Log.d("PlayerPoints", "Current Player Points: $playerPoints") // Log the updated points
+
                 Handler(Looper.getMainLooper()).postDelayed({
                     showQuestionDialog()
                 }, 2000)
+
                 shakeScreen()
                 viewLifecycleOwner.lifecycleScope.launch {
                     triviaDao.markQuestionAsAskedById(question.number)
@@ -432,8 +432,8 @@ class BattleFragment : Fragment() {
                     performAttackAnimation(isPlayerAttacking = true)
                 }
 
-
             } else {
+                // Wrong answer
                 playerHealth -= healthDeduction
                 Toast.makeText(
                     requireContext(),
@@ -456,19 +456,35 @@ class BattleFragment : Fragment() {
                 )
 
                 shakeScreen()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    showDefendDialog()
-                }, 1000)
-                if (playerHealth <= 0) {
+
+                // Check if player health is greater than 0 before showing defend dialog
+                if (playerHealth > 0) {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        showDefendDialog()
+                    }, 1000)
+                } else if(playerHealth <= 0) {
+                    // Player health is 0 or less, the player is defeated
                     Toast.makeText(
                         requireContext(),
                         "You are defeated! Please Try Again!",
                         Toast.LENGTH_LONG
                     ).show()
                     findNavController().navigate(R.id.mapsFragment)
-
                     return@setOnClickListener
-                } else {
+                }
+                else  {
+                    // Player health is 0 or less, the player is defeated
+                    Toast.makeText(
+                        requireContext(),
+                        "You are defeated! Please Try Again!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    findNavController().navigate(R.id.mapsFragment)
+                    return@setOnClickListener
+                }
+
+                // Perform enemy attack animation if player is not defeated
+                if (playerHealth > 0) {
                     performAttackAnimationEnemy(isPlayerAttacking = true)
                 }
             }
@@ -592,10 +608,12 @@ class BattleFragment : Fragment() {
 
 
     private fun startTimer() {
-        countDownTimer = object : CountDownTimer(60000, 1000) { // 1 minute
+        countDownTimer = object : CountDownTimer(300000, 1000) { // 5 minutes
             override fun onTick(millisUntilFinished: Long) {
-                val secondsRemaining = millisUntilFinished / 1000
-                binding.timerText.text = "${secondsRemaining}s"
+                val minutesRemaining = (millisUntilFinished / 1000) / 60
+                val secondsRemaining = (millisUntilFinished / 1000) % 60
+                // Format the time as mm:ss
+                binding.timerText.text = String.format("%02d:%02d", minutesRemaining, secondsRemaining)
             }
 
             override fun onFinish() {
@@ -608,6 +626,7 @@ class BattleFragment : Fragment() {
         }
         countDownTimer.start()
     }
+
 
     private fun displaySelectedCharacterGif(characterId: Int) {
         Glide.with(this).asGif().load(characterId).into(binding.player1Character)
