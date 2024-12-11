@@ -1,5 +1,6 @@
 package com.example.fightinggame.ui
 
+import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -127,6 +128,7 @@ class BattleFragment : Fragment() {
                 }
                 binding.btnNo.setOnClickListener {
                     findNavController().navigate(R.id.mapsFragment)
+                    dialog.dismiss()
                 }
 
                 // Show the dialog
@@ -289,9 +291,7 @@ class BattleFragment : Fragment() {
                                         "PlayerPoints",
                                         "Current Player Points: $playerPoints"
                                     ) // Log the updated points
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        showQuestionDialog()
-                                    }, 2000)
+
                                     shakeScreen()
                                     viewLifecycleOwner.lifecycleScope.launch {
                                         triviaDao.markQuestionAsAskedById(question.number)
@@ -319,6 +319,9 @@ class BattleFragment : Fragment() {
                                     } else {
                                         // If the monster is not defeated, continue with the attack animation
                                         performAttackAnimation(isPlayerAttacking = true)
+                                        Handler(Looper.getMainLooper()).postDelayed({
+                                            showQuestionDialog()
+                                        }, 2000)
                                     }
 
 
@@ -344,9 +347,7 @@ class BattleFragment : Fragment() {
                                     )
                                     shakeScreen()
                                     questionDialog?.dismiss()
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        showDefendDialog()
-                                    }, 1000)
+
                                     if (playerHealth <= 0) {
                                         Toast.makeText(
                                             requireContext(),
@@ -358,6 +359,9 @@ class BattleFragment : Fragment() {
                                         return@setOnClickListener
                                     } else {
                                         performAttackAnimationEnemy(isPlayerAttacking = true)
+                                        Handler(Looper.getMainLooper()).postDelayed({
+                                            showDefendDialog()
+                                        }, 3000)
                                     }
                                 }
 
@@ -398,12 +402,10 @@ class BattleFragment : Fragment() {
                 playerPoints++ // Increment points
                 questionDialog?.dismiss()
                 Log.d("PlayerPoints", "Current Player Points: $playerPoints") // Log the updated points
-
-                Handler(Looper.getMainLooper()).postDelayed({
-                    showQuestionDialog()
-                }, 2000)
-
                 shakeScreen()
+
+
+
                 viewLifecycleOwner.lifecycleScope.launch {
                     triviaDao.markQuestionAsAskedById(question.number)
                     Log.d(
@@ -430,6 +432,9 @@ class BattleFragment : Fragment() {
                 } else {
                     // If the monster is not defeated, continue with the attack animation
                     performAttackAnimation(isPlayerAttacking = true)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        showQuestionDialog()
+                    }, 3000)
                 }
 
             } else {
@@ -456,37 +461,22 @@ class BattleFragment : Fragment() {
                 )
 
                 shakeScreen()
+                if (playerHealth <= 0) {
+                    Toast.makeText(
+                        requireContext(),
+                        "You are defeated! Please Try Again!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    findNavController().navigate(R.id.mapsFragment)
 
-                // Check if player health is greater than 0 before showing defend dialog
-                if (playerHealth > 0) {
+                    return@setOnClickListener
+                } else {
+                    performAttackAnimationEnemy(isPlayerAttacking = true)
                     Handler(Looper.getMainLooper()).postDelayed({
                         showDefendDialog()
-                    }, 1000)
-                } else if(playerHealth <= 0) {
-                    // Player health is 0 or less, the player is defeated
-                    Toast.makeText(
-                        requireContext(),
-                        "You are defeated! Please Try Again!",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    findNavController().navigate(R.id.mapsFragment)
-                    return@setOnClickListener
-                }
-                else  {
-                    // Player health is 0 or less, the player is defeated
-                    Toast.makeText(
-                        requireContext(),
-                        "You are defeated! Please Try Again!",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    findNavController().navigate(R.id.mapsFragment)
-                    return@setOnClickListener
+                    }, 3000)
                 }
 
-                // Perform enemy attack animation if player is not defeated
-                if (playerHealth > 0) {
-                    performAttackAnimationEnemy(isPlayerAttacking = true)
-                }
             }
 
             // Update health display and show the next question
@@ -632,9 +622,6 @@ class BattleFragment : Fragment() {
         Glide.with(this).asGif().load(characterId).into(binding.player1Character)
     }
 
-    private fun displaySelectedCharacterGifEnemy(characterId: Int) {
-        Glide.with(this).asGif().load(characterId).into(binding.player2Character)
-    }
 
     private fun shakeScreen() {
         val shake = AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
@@ -646,36 +633,99 @@ class BattleFragment : Fragment() {
             // Get the selected character's information
             val character = enemyDao.getMonsterById(selectedIndex!!)
             character?.let {
-                // Display attack animation for the player
-                displaySelectedCharacterGifAttackEnemy(it.gifAttack!!)
-                Handler(Looper.getMainLooper()).postDelayed({
-                    displaySelectedCharacterGifEnemy(it.gifStand!!)
-                }, 3000)
+                // Teleport the character from the right side before attacking
+                teleportAndAttackEnemy(it.gifAttack!!, it.gifStand!!)
             }
         }
     }
 
-    private fun displaySelectedCharacterGifAttackEnemy(gifAttack: Int) {
-        Glide.with(this).asGif().load(gifAttack).into(binding.player2Character)
+    private fun teleportAndAttackEnemy(gifAttack: Int, gifStand: Int) {
+        // Teleport the enemy image from right to left by 100dp
+        val initialPosition = binding.player2Character.translationX
+        val targetPosition = initialPosition - dpToPx(350f) // Move by 100dp to the left
+
+        // Animate the translation
+        ObjectAnimator.ofFloat(binding.player2Character, "translationX", initialPosition, targetPosition).apply {
+            duration = 500 // Duration for the teleportation animation
+            start() // Start the teleport animation
+        }
+        shakeScreen()
+        // After the teleportation, start the attack animation
+        Handler(Looper.getMainLooper()).postDelayed({
+            // Display attack animation
+            displaySelectedCharacterGifEnemy(gifAttack)
+            shakeScreen()
+            // Return to standing GIF after the attack
+            Handler(Looper.getMainLooper()).postDelayed({
+                displaySelectedCharacterGifEnemy(gifStand)
+                shakeScreen()
+                // Reset position back to the original
+                ObjectAnimator.ofFloat(binding.player2Character, "translationX", targetPosition, initialPosition).apply {
+                    duration = 500 // Duration to return to original position
+                    start()
+                }
+            }, 3000) // Wait 3 seconds for the attack animation to finish
+        }, 500) // Wait for teleportation to finish
     }
+
+    private fun displaySelectedCharacterGifEnemy(characterId: Int) {
+        Glide.with(this).asGif().load(characterId).into(binding.player2Character)
+    }
+
+    // Helper function to convert dp to pixels
+    private fun dpToPx(dp: Float): Float {
+        return dp * resources.displayMetrics.density
+    }
+
 
     private fun performAttackAnimation(isPlayerAttacking: Boolean) {
         viewLifecycleOwner.lifecycleScope.launch {
             // Get the selected character's information
             val character = characterSelectionDao.getCharacterSelectionById(1)
             character?.let {
-                // Display attack animation for the player
-                displaySelectedCharacterGifAttack(it.gifAttack!!)
-                Handler(Looper.getMainLooper()).postDelayed({
-                    displaySelectedCharacterGif(it.gifStand!!)
-                }, 3000)
+                // Teleport the character before attacking
+                teleportAndAttack(it.gifAttack!!, it.gifStand!!)
             }
         }
     }
 
+    private fun teleportAndAttack(gifAttack: Int, gifStand: Int) {
+        // Get the initial position of the character
+        val initialPosition = binding.player1Character.translationX
+        // Target position: move 100dp to the right
+        val targetPosition = initialPosition + dpToPx(350f) // Move 100dp to the right
+
+        // Animate the character moving from its initial position to the right
+        ObjectAnimator.ofFloat(binding.player1Character, "translationX", initialPosition, targetPosition).apply {
+            duration = 500 // Duration for the teleportation animation
+            start() // Start the teleport animation
+        }
+
+        // After teleportation, display the attack animation
+        Handler(Looper.getMainLooper()).postDelayed({
+            // Display the attack animation
+            displaySelectedCharacterGifAttack(gifAttack)
+
+            // After the attack animation, reset back to the standing GIF
+            Handler(Looper.getMainLooper()).postDelayed({
+                displaySelectedCharacterGif(gifStand)
+
+                // Reset position back to its original position after standing
+                ObjectAnimator.ofFloat(binding.player1Character, "translationX", targetPosition, initialPosition).apply {
+                    duration = 500 // Duration to return to the original position
+                    start()
+                }
+            }, 3000) // Wait for the attack animation to finish (3 seconds)
+        }, 500) // Wait for the teleportation to complete (0.5 seconds)
+    }
+
+
+
     private fun displaySelectedCharacterGifAttack(gifAttack: Int) {
         Glide.with(this).asGif().load(gifAttack).into(binding.player1Character)
     }
+
+
 }
 
 
